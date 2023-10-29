@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 @Entity
 public class UserOfTree implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	public enum Visiblity{
 		PUBLIC,
 		PRIVATE,
