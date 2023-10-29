@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FindyourfatherApplication {
+public class FindYourFatherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FindyourfatherApplication.class, args);
+		SpringApplication.run(FindYourFatherApplication.class, args);
 	}
 
 }
