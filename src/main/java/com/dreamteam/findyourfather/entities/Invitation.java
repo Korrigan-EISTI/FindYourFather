@@ -62,7 +62,4 @@ public class Invitation implements Serializable{
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	
-	
 }

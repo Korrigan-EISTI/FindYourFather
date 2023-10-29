@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class UserOfTree implements Serializable{
+public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class UserOfTree implements Serializable{
 	private String mdp;
 	private Visiblity visibilityLevel;
 	
-	public UserOfTree(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
+	public User(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
 		super();
 		this.id = id;
 		this.idPersonne = idPersonne;
@@ -71,7 +71,5 @@ public class UserOfTree implements Serializable{
 
 	public void setVisibilityLevel(Visiblity visibilityLevel) {
 		this.visibilityLevel = visibilityLevel;
-	}
-	
-	
+	}	
 }

@@ -90,5 +90,4 @@ public class Personne implements Serializable{
 	public void setGenre(boolean genre) {
 		this.genre = genre;
 	}
-	
 }

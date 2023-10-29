@@ -2,12 +2,11 @@ package com.dreamteam.findyourfather;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class FindYourFatherApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(FindYourFatherApplication.class, args);
-	}
-
+public class FindYourFatherApplication extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(FindYourFatherApplication.class, args);
+    }
 }
