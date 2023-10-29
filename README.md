@@ -62,6 +62,12 @@ The files will be generated in the `src/main/resources/static` directory of the 
 
 ### 4. Backend - Spring Boot
 
+- Go back to the project directory:
+
+```
+cd ..
+```
+
 - Build the Spring Boot application:
 
 ```

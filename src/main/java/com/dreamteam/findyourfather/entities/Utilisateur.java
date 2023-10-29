@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class User implements Serializable{
+public class Utilisateur implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class User implements Serializable{
 	private String mdp;
 	private Visiblity visibilityLevel;
 	
-	public User(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
+	public Utilisateur(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
 		super();
 		this.id = id;
 		this.idPersonne = idPersonne;
