@@ -1,4 +1,22 @@
-html {
-	background-color: floralwhite;
-	font-family: 'Cormorant', sans-serif;
+body {
+    background-image: url('assets/background.jpg');
+    background-position: center;
+    background-size: cover;
+    font-family: 'Cormorant', sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+	display: none;
+}
+
+body::-webkit-scrollbar-track {
+	display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+	display: none;
 }

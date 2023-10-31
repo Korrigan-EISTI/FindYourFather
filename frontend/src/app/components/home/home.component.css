@@ -1,10 +1,27 @@
+#welcome-content {
+	background-color: #ffffff;
+	padding: 2%;
+	padding-top: 0%;
+	margin-left: 10%;
+	margin-right: 10%;
+	border: 2px solid #ff0000;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
 #welcome {
-  margin-top: 20%;
-  font-size: 2em;
-  margin-bottom: 20px;
+	font-size: 2em;
+	margin-top: 4%;
+	margin-bottom: 4%;
+}
+
+.logo {
+	width: 1.5%;
+	height: 1.5%;
 }
 
 .welcome-text {
-  font-size: 1.2em;
-  line-height: 1.4;
+	font-size: 1.2em;
+	line-height: 1.3;
 }
