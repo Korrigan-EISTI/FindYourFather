@@ -1,14 +1,57 @@
 <div class="auth-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" [(ngModel)]="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" [(ngModel)]="password" required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
+	<div class="left-column">
+		<h2>Login</h2>
+		<form (ngSubmit)="onLoginSubmit()">
+			<div class="form-group">
+				<label for="loginEmail">Email</label>
+				<input type="text" id="loginEmail" name="loginEmail" [(ngModel)]="loginEmail" required>
+			</div>
+			<div class="form-group">
+				<label for="loginPassword">Password</label>
+				<input type="password" id="loginPassword" name="loginPassword" [(ngModel)]="loginPassword" required>
+			</div>
+			<button type="submit">Login</button>
+		</form>
+	</div>
+	<div class="right-column">
+		<h2>Create an Account</h2>
+		<form (ngSubmit)="onRegisterSubmit()">
+			<div class="form-group">
+				<label for="registrationEmail">Email</label>
+				<input type="email" id="registrationEmail" name="registrationEmail" [(ngModel)]="registrationEmail" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationPassword">Password</label>
+				<input type="password" id="registrationPassword" name="registrationPassword" [(ngModel)]="registrationPassword" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationSsn">Social Security Number</label>
+				<input type="number" id="registrationSsn" name="registrationSsn" [(ngModel)]="registrationSsn" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationLastname">Last Name</label>
+				<input type="text" id="registrationLastname" name="registrationLastname" [(ngModel)]="registrationLastname" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationFirstname">First Name</label>
+				<input type="text" id="registrationFirstname" name="registrationFirstname" [(ngModel)]="registrationFirstname" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationBirthdate">Date of Birth</label>
+				<input type="date" id="registrationBirthdate" name="registrationBirthdate" [(ngModel)]="registrationBirthdate" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationNationality">Nationality</label>
+				<input type="text" id="registrationNationality" name="registrationNationality" [(ngModel)]="registrationNationality" required>
+			</div>
+			<div class="form-group">
+				<label for="registrationGender">Gender</label>
+				<select id="registrationGender" name="registrationGender" [(ngModel)]="registrationGender" required>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				</select>
+			</div>
+			<button type="submit">Register</button>
+		</form>
+	</div>
 </div>
