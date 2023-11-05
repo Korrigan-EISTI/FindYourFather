@@ -23,7 +23,10 @@ public class Utilisateur implements Serializable{
 	private String email;
 	private String mdp;
 	private Visiblity visibilityLevel;
-	
+
+	public Utilisateur() {
+		super();
+	}
 	public Utilisateur(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
 		super();
 		this.id = id;

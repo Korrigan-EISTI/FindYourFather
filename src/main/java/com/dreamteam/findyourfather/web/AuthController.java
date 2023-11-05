@@ -1,9 +1,12 @@
 package com.dreamteam.findyourfather.web;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamteam.findyourfather.dao.PersonneRepository;
 import com.dreamteam.findyourfather.dao.UtilisateurRepository;
@@ -14,6 +17,7 @@ import com.dreamteam.findyourfather.entities.Utilisateur;
 @Controller
 public class AuthController {
     private final UtilisateurRepository utilisateurRepository;
+    private final PersonneRepository personneRepository;
     
 	private class LoginInfo{
 		public String getEmail() {
@@ -50,20 +54,29 @@ public class AuthController {
 		private String gender;
 		
 	}
-	public AuthController(UtilisateurRepository utilisateurRepository) {
+	public AuthController(UtilisateurRepository utilisateurRepository,PersonneRepository personneRepository) {
         this.utilisateurRepository = utilisateurRepository;
+        this.personneRepository = personneRepository;
     }
 	
-    @PostMapping("/register")
-    public String register(@RequestParam LoginInfo loginInfo) {
-    	System.out.println("click");
-    	if(utilisateurRepository.findByEmail(loginInfo.getEmail()).size()==0){
-        	System.out.println("new");
-    		Personne personne = new Personne(loginInfo.getSsn(),loginInfo.getLastname(),loginInfo.getFirstname());
-    		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), loginInfo.getEmail(), loginInfo.getPassword(), Utilisateur.Visiblity.PUBLIC);
-            return "index.html";
+    @PostMapping(path="/register",produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String register(@RequestParam String email,
+    		@RequestParam String password,
+    		@RequestParam Long ssn,
+    		@RequestParam String lastname,
+    		@RequestParam String firstname,
+    		@RequestParam String birthdate,
+    		@RequestParam String nationality,
+    		@RequestParam String gender) {
+    	System.out.println(email);
+    	if(utilisateurRepository.findByEmail(email).size()==0){
+    		Personne personne = new Personne(ssn,lastname,firstname);
+    		personneRepository.save(personne);
+    		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), email, password, Utilisateur.Visiblity.PUBLIC);
+            utilisateurRepository.save(utilisateur);
+        	return "success";
     	}
-    	return "index.html";
+    	return "address already in use";
     }
 }
 

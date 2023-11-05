@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 @Component({
 	selector: 'app-auth',
 	templateUrl: './auth.component.html',
@@ -7,14 +6,27 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthComponent {
 	formData: any = {};
-	
-	constructor(private http: HttpClient) {}
+
 
 	onRegisterSubmit() {
+		const form: HTMLFormElement = document.getElementById('registerForm') as HTMLFormElement;
+		const formData = new FormData(form)
+		// Send the form data to a page using the FormData API and JavaScript
 		const url = '/register'; // Replace with your target page URL
-		this.http.post(url, this.formData);
-	}
-	onLoginSubmit(){
 
+		fetch(url, {
+			method: 'post',
+			body: new URLSearchParams(formData as any)
+		}).then(response => {
+			if (!response.ok) {
+			  throw new Error(response.statusText)
+			}
+			response.text().then(text=>document.getElementById("status")!.innerHTML = text);
+		  });
+
+		return false;
 	}
+
+	onLoginSubmit(){
+}
 }

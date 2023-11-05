@@ -15,7 +15,7 @@
 	</div>
 	<div class="right-column">
 		<h2>Create an Account</h2>
-		<form (ngSubmit)="onRegisterSubmit()">
+		<form id=registerForm (ngSubmit)="onRegisterSubmit()" method="post">
 			<div class="form-group">
 				<label for="email">Email</label>
 				<input type="email" id="email" name="email" [(ngModel)]="formData.email" required>
@@ -52,6 +52,7 @@
 				</select>
 			</div>
 			<button type="submit">Register</button>
+			<p id="status"></p>
 		</form>
 	</div>
 </div>
