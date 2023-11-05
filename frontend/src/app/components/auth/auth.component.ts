@@ -1,38 +1,20 @@
 import { Component } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
 	selector: 'app-auth',
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-	loginEmail: string = '';
-	loginPassword: string = '';
-
-	registrationEmail: string = '';
-	registrationPassword: string = '';
-	registrationSsn: string = '';
-	registrationLastname: string = '';
-	registrationFirstname: string = '';
-	registrationBirthdate: string = '';
-	registrationNationality: string = '';
-	registrationGender: string = '';
-
-	onLoginSubmit() {
-		console.log('Login Form Submitted:', this.loginEmail, this.loginPassword);
-	}
+	formData: any = {};
+	
+	constructor(private http: HttpClient) {}
 
 	onRegisterSubmit() {
-		console.log(
-			'Registration Form Submitted:',
-			this.registrationEmail,
-			this.registrationPassword,
-			this.registrationSsn,
-			this.registrationLastname,
-			this.registrationFirstname,
-			this.registrationBirthdate,
-			this.registrationNationality,
-			this.registrationGender
-		);
+		const url = '/register'; // Replace with your target page URL
+		this.http.post(url, this.formData);
+	}
+	onLoginSubmit(){
+
 	}
 }
