@@ -40,10 +40,28 @@ public class TreeController {
     {
     	p.add(pers);
     	
-    	if (pers.mere == null && pers.pere == null)
-    		return;
+    	if (pers.mere != null)
+    	{
+    		getTree(personneRepository.findById(pers.mere).get(), p);
+    		List<Personne> tmpPers = personneRepository.findByMother(pers.mere);
+    		for (Personne personne : tmpPers)
+    		{
+    			if (!p.contains(personne))
+    				p.add(personne);
+    		}
+    	}
     		
-    	getTree(personneRepository.findById(pers.mere).get(), p);
-    	getTree(personneRepository.findById(pers.pere).get(), p);
+    		
+    	if( pers.pere != null)
+    	{
+    		getTree(personneRepository.findById(pers.pere).get(), p);
+    		List<Personne> tmpPers = personneRepository.findByFather(pers.pere);
+    		for (Personne personne : tmpPers)
+    		{
+    			if (!p.contains(personne))
+    				p.add(personne);
+    		}
+    	}
+    		
     }
 }

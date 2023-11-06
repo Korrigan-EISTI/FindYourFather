@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import com.dreamteam.findyourfather.entities.Personne;
 
 public interface PersonneRepository extends JpaRepository<Personne, Long>{
-	@Query(value = "SELECT * FROM public.personne AS p WHERE p.id = ?1", nativeQuery = true)
-	Personne findOnePersonne(String id);
+	@Query(value="SELECT * FROM personne WHERE personne.pere = ?1", nativeQuery = true)
+	List<Personne> findByFather(Long id);
+	
+	@Query(value="SELECT * FROM personne WHERE personne.mere = ?1", nativeQuery = true)
+	List<Personne> findByMother(Long id);
 }
