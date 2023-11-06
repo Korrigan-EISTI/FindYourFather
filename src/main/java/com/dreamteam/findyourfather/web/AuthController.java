@@ -23,6 +23,7 @@ public class AuthController {
     private final UtilisateurRepository utilisateurRepository;
     private final PersonneRepository personneRepository;
     
+	@SuppressWarnings("unused")
 	private class LoginInfo{
 		
 		private String email;

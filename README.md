@@ -53,7 +53,7 @@ npm install
 - Compile the Angular application in production mode:
 
 ```
-ng build --configuration=production
+ng build-prod
 ```
 
 The files will be generated in the `src/main/resources/static` directory of the backend.
