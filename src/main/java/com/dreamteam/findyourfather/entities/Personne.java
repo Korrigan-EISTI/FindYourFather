@@ -10,17 +10,20 @@ import jakarta.persistence.Id;
 public class Personne implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+	public enum Genre{
+		HOMME,
+		FEMME
+	}
 	@Id @GeneratedValue
 	private Long id;
 	private Long numeroSecu;
 	private String nom;
 	private String prenom;
-	private Long age;
+	private String naissance;
 	private String dateNaissance;
 	private String dateDeces;
 	private String nationalite;
-	private boolean genre;
+	private Genre genre;
 	public Personne pere;
 	public Personne mere;
 	
@@ -60,12 +63,6 @@ public class Personne implements Serializable{
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public Long getAge() {
-		return age;
-	}
-	public void setAge(Long age) {
-		this.age = age;
-	}
 	public String getDateNaissance() {
 		return dateNaissance;
 	}
@@ -84,10 +81,18 @@ public class Personne implements Serializable{
 	public void setNationalite(String nationalite) {
 		this.nationalite = nationalite;
 	}
-	public boolean isGenre() {
+	public Genre isGenre() {
 		return genre;
 	}
-	public void setGenre(boolean genre) {
+	public void setGenre(Genre genre) {
 		this.genre = genre;
+	}
+
+	public String getNaissance() {
+		return naissance;
+	}
+
+	public void setNaissance(String naissance) {
+		this.naissance = naissance;
 	}
 }
