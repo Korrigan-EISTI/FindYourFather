@@ -52,7 +52,7 @@ export class FamilyTreeComponent implements OnInit {
       go.GraphObject.make(go.Node, 'Auto',
         go.GraphObject.make(go.Shape, 'Rectangle',
           {
-            fill: 'rgb(221, 221, 0)',
+            fill: 'rgb(180, 180, 180)',
             width: 150,
             height: 50,
           }

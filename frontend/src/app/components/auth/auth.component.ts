@@ -1,32 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-auth',
 	templateUrl: './auth.component.html',
-	styleUrls: ['./auth.component.css']
+	styleUrls: ['./auth.component.css'],
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 	formData: any = {};
-
-	ngOnInit() {
-		this.slideInColumns();
-	}
-
-	slideInColumns() {
-		const leftColumn = document.querySelector('.left-column');
-		const rightColumn = document.querySelector('.right-column');
-
-		if (leftColumn && rightColumn) {
-			leftColumn.classList.add('slide-in');
-			rightColumn.classList.add('slide-in');
-		}
-	}
-
+	
 	onRegisterSubmit() {
 		const form: HTMLFormElement = document.getElementById('registerForm') as HTMLFormElement;
 		const formData = new FormData(form);
-		// Send the form data to a page using the FormData API and JavaScript
-		const url = '/register'; // Replace with your target page URL
+		const url = '/register';
 
 		fetch(url, {
 			method: 'post',
@@ -44,8 +29,7 @@ export class AuthComponent implements OnInit {
 	onLoginSubmit() {
 		const form: HTMLFormElement = document.getElementById('loginForm') as HTMLFormElement;
 		const formData = new FormData(form);
-		// Send the form data to a page using the FormData API and JavaScript
-		const url = '/login'; // Replace with your target page URL
+		const url = '/login';
 
 		fetch(url, {
 			method: 'post',

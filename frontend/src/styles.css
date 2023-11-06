@@ -1,3 +1,7 @@
+:root {
+  --main-color: #007bff;
+}
+
 body {
     background-image: url('assets/background.jpg');
     background-position: center;
