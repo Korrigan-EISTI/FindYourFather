@@ -1,16 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
 	selector: 'app-auth',
 	templateUrl: './auth.component.html',
 	styleUrls: ['./auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
 	formData: any = {};
 
+	ngOnInit() {
+		this.slideInColumns();
+	}
+
+	slideInColumns() {
+		const leftColumn = document.querySelector('.left-column');
+		const rightColumn = document.querySelector('.right-column');
+
+		if (leftColumn && rightColumn) {
+			leftColumn.classList.add('slide-in');
+			rightColumn.classList.add('slide-in');
+		}
+	}
 
 	onRegisterSubmit() {
 		const form: HTMLFormElement = document.getElementById('registerForm') as HTMLFormElement;
-		const formData = new FormData(form)
+		const formData = new FormData(form);
 		// Send the form data to a page using the FormData API and JavaScript
 		const url = '/register'; // Replace with your target page URL
 
@@ -19,17 +33,17 @@ export class AuthComponent {
 			body: new URLSearchParams(formData as any)
 		}).then(response => {
 			if (!response.ok) {
-			  throw new Error(response.statusText)
+				throw new Error(response.statusText);
 			}
-			response.text().then(text=>document.getElementById("registerStatus")!.innerHTML = text);
-		  });
+			response.text().then(text => (document.getElementById("registerStatus")!.innerHTML = text));
+		});
 
 		return false;
 	}
 
-	onLoginSubmit(){
+	onLoginSubmit() {
 		const form: HTMLFormElement = document.getElementById('loginForm') as HTMLFormElement;
-		const formData = new FormData(form)
+		const formData = new FormData(form);
 		// Send the form data to a page using the FormData API and JavaScript
 		const url = '/login'; // Replace with your target page URL
 
@@ -38,10 +52,10 @@ export class AuthComponent {
 			body: new URLSearchParams(formData as any)
 		}).then(response => {
 			if (!response.ok) {
-			  throw new Error(response.statusText)
+				throw new Error(response.statusText);
 			}
-			response.text().then(text=>document.getElementById("loginStatus")!.innerHTML = text);
-		  });
+			response.text().then(text => (document.getElementById("loginStatus")!.innerHTML = text));
+		});
 
 		return false;
 	}
