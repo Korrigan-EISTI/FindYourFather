@@ -7,12 +7,14 @@ import * as go from 'gojs';
   styleUrls: ['./family-tree.component.css']
 })
 export class FamilyTreeComponent implements OnInit {
+	
   private diagram!: go.Diagram;
+  
   private data: {
     id: number;
     key: number;
     numeroSecu: number;
-   	nom: string;
+    nom: string;
     prenom: string;
     naissance: string;
     dateNaissance: string;
@@ -20,53 +22,50 @@ export class FamilyTreeComponent implements OnInit {
     nationalite: string;
     genre: number;
     pere?: number;
-   	mere?: number;
+    mere?: number;
   }[] = [];
+  
   private linkDataArray: { from: number; to: number }[] = [];
 
-  constructor() {
-    // Génération des liens de parenté
-  }
+  constructor() {}
 
   ngOnInit() {
-	this.showTree();
+    this.showTree();
   }
   
   public showTree(){
-    console.log("hey");
-		// Send the form data to a page using the FormData API and JavaScript
-		const url = '/showTree'; // Replace with your target page URL
+    const url = '/showTree';
 
-		fetch(url, {
-			method: 'post',
-		}).then(response =>  {
-			response.json().then(data => {
-				console.log(data);
-				this.data = data;
-				
-				if (this.data.length == 0) return;
-				
-				this.createTree();
-			});
-		});
+    fetch(url, {
+      method: 'post',
+    }).then(response =>  {
+      response.json().then(data => {
+        console.log(data);
+        this.data = data;
+        
+        if (this.data.length == 0) return;
+        
+        this.createTree();
+      });
+    });
 
-		return false;
-	}
-	
-	public createTree(){
-		this.diagram = new go.Diagram('family-tree-diagram', { initialContentAlignment: go.Spot.Center });
-		for (const individual of this.data) {
-			individual.key = individual.id;
-     		if (individual.pere !== null) {
-        		this.linkDataArray.push({ from: individual.pere!, to: individual.key });
-      		}
-      		if (individual.mere !== null) {
-        		this.linkDataArray.push({ from: individual.mere!, to: individual.key });
-      		}
-    	}
-    	
-	console.log(this.linkDataArray);
-	console.log(this.data);
+    return false;
+  }
+  
+  public createTree(){
+    this.diagram = new go.Diagram('family-tree-diagram', { initialContentAlignment: go.Spot.Center });
+    for (const individual of this.data) {
+      individual.key = individual.id;
+      if (individual.pere !== null) {
+        this.linkDataArray.push({ from: individual.pere!, to: individual.key });
+      }
+      if (individual.mere !== null) {
+        this.linkDataArray.push({ from: individual.mere!, to: individual.key });
+      }
+    }
+    
+    console.log(this.linkDataArray);
+    console.log(this.data);
     // Modèle de données
     this.diagram.model = new go.GraphLinksModel(this.data, this.linkDataArray);
 
@@ -98,5 +97,5 @@ export class FamilyTreeComponent implements OnInit {
       columnSpacing: 10,
       layerSpacing: 40,
     }); 
-	}
+  }
 }
