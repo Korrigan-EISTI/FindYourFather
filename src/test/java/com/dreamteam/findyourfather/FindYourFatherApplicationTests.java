@@ -10,4 +10,8 @@ class FindYourFatherApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void testQueryFathers(){
+		
+	}
 }

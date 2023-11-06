@@ -13,6 +13,8 @@ import com.dreamteam.findyourfather.dao.UtilisateurRepository;
 import com.dreamteam.findyourfather.entities.Personne;
 import com.dreamteam.findyourfather.entities.Utilisateur;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class AuthController {
@@ -67,13 +69,15 @@ public class AuthController {
     		@RequestParam String firstname,
     		@RequestParam String birthdate,
     		@RequestParam String nationality,
-    		@RequestParam String gender) {
+    		@RequestParam String gender, HttpSession session) {
     	System.out.println(email);
     	if(utilisateurRepository.findByEmail(email).size()==0){
     		Personne personne = new Personne(ssn,lastname,firstname);
     		personneRepository.save(personne);
     		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), email, password, Utilisateur.Visiblity.PUBLIC);
             utilisateurRepository.save(utilisateur);
+            session.setAttribute("id", personne.getId());
+            
         	return "success";
     	}
     	return "address already in use";

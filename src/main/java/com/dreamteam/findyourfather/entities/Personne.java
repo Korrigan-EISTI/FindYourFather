@@ -21,8 +21,8 @@ public class Personne implements Serializable{
 	private String dateDeces;
 	private String nationalite;
 	private boolean genre;
-	public Personne pere;
-	public Personne mere;
+	public Long pere;
+	public Long mere;
 	
 	
 	public Personne(Long numeroSecu, String nom, String prenom){
