@@ -74,5 +74,24 @@ export class FamilyTreeComponent implements OnInit {
       columnSpacing: 10,
       layerSpacing: 40,
     });
+    this.showTree();
   }
+  
+  public showTree(){
+    console.log("hey");
+		// Send the form data to a page using the FormData API and JavaScript
+		const url = '/showTree'; // Replace with your target page URL
+
+		fetch(url, {
+			method: 'post',
+		}).then(response =>  {
+			response.json().then(data => {
+				this.diagram.model = new go.TreeModel(data);
+			});
+			
+			
+		});
+
+		return false;
+	}
 }
