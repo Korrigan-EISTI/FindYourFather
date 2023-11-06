@@ -74,10 +74,16 @@ cd ..
 mvnw clean package
 ```
 
-- Run the Spring Boot application:
+- Run the Spring Boot application with:
 
 ```
 mvnw spring-boot:run
+```
+
+- or with:
+
+```
+java -jar target\findyourfather-1.0.jar
 ```
 
 Your application is now accessible at `http://localhost:8080`.
