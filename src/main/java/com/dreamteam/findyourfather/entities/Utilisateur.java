@@ -27,6 +27,7 @@ public class Utilisateur implements Serializable{
 	public Utilisateur() {
 		super();
 	}
+	
 	public Utilisateur(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
 		super();
 		this.id = id;

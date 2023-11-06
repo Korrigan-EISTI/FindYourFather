@@ -38,24 +38,31 @@ public class AuthController {
 		public String getEmail() {
 			return email;
 		}
+		
 		public String getPassword() {
 			return password;
 		}
+		
 		public Long getSsn() {
 			return ssn;
 		}
+		
 		public String getLastname() {
 			return lastname;
 		}
+		
 		public String getFirstname() {
 			return firstname;
 		}
+		
 		public String getBirthdate() {
 			return birthdate;
 		}
+		
 		public String getNationality() {
 			return nationality;
 		}
+		
 		public String getGender() {
 			return gender;
 		}		
@@ -80,6 +87,7 @@ public class AuthController {
     	if(utilisateurRepository.findByEmail(email).size()==0){
     		Personne personne = new Personne(ssn,lastname,firstname);
     		personne.setNationalite(nationality);
+    		
     		if(gender=="male") {
     			personne.setGenre(Genre.HOMME);
     		}
@@ -90,10 +98,11 @@ public class AuthController {
     		personneRepository.save(personne);
     		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), email, password, Utilisateur.Visiblity.PUBLIC);
             utilisateurRepository.save(utilisateur);
-        	return "<p style='color: green;'>Account successfully created</p>";
+            return "<p style='color: green;'>Account successfully created</p>";
     	}
     	return "<p style='color: red;'>This email is already used</p>";
     }
+    
     @PostMapping("/login")
     public @ResponseBody String login(HttpSession session,@RequestParam String email,
     		@RequestParam String password) {
