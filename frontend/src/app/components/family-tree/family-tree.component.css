@@ -1,10 +1,17 @@
 #family-tree-main-div {
-	height: 65vh;
-	margin-left: 6%;
-	margin-right: 6%;
-	border-radius: 10px;
-	border: 2px solid rgb(221, 221, 0);
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-	padding: 2%;
-	background-color: #ffffff;
+    height: 75vh;
+    margin-left: 6%;
+    margin-right: 6%;
+    border-radius: 10px;
+    border: 2px solid rgb(221, 221, 0);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    padding: 2%;
+    background-color: #ffffff;
+}
+
+#family-tree-diagram {
+    width: 100%;
+    height: 70vh;
+    max-width: 100%;
+    max-height: 65vh;
 }
