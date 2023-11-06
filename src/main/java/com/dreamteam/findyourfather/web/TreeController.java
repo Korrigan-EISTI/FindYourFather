@@ -28,7 +28,7 @@ public class TreeController {
 	@PostMapping(path = "/showTree", produces = MediaType.APPLICATION_JSON_VALUE)
 	
 	public @ResponseBody List<Personne> familyTree(HttpSession session){
-    	Personne personne = personneRepository.findById(52L).get();
+    	Personne personne = personneRepository.findById((Long) session.getAttribute("user")).get();
     	
     	List<Personne> pers = new ArrayList<Personne>();
     	
