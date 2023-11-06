@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-=======
-import { Component, OnInit } from '@angular/core';
->>>>>>> maven
 import * as go from 'gojs';
 
 @Component({
@@ -119,7 +115,7 @@ export class FamilyTreeComponent implements OnInit {
       angle: 90,           // Angle de la disposition des nœuds (90 degrés pour une disposition verticale)
       nodeSpacing: 10,     // Espacement horizontal entre les nœuds
       layerSpacing: 40,    // Espacement vertical entre les couches d'arborescence
-      layerStyle: go.TreeLayout.LayerUniform 
+      layerStyle: go.TreeLayout.LayerUniform
     });
   }
 }
