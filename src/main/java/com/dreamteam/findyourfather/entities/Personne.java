@@ -22,7 +22,6 @@ public class Personne implements Serializable{
 	private String nom;
 	private String prenom;
 	private String naissance;
-	private String dateNaissance;
 	private String dateDeces;
 	private String nationalite;
 	private Genre genre;
@@ -71,14 +70,6 @@ public class Personne implements Serializable{
 	
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
-	}
-	
-	public String getDateNaissance() {
-		return dateNaissance;
-	}
-	
-	public void setDateNaissance(String dateNaissance) {
-		this.dateNaissance = dateNaissance;
 	}
 	
 	public String getDateDeces() {
