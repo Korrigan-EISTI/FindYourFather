@@ -76,6 +76,7 @@ public class AuthController {
     @PostMapping(path="/register",produces = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody String register(@RequestParam String email,
     		@RequestParam String password,
+    		@RequestParam Long phoneNumber,
     		@RequestParam Long ssn,
     		@RequestParam String lastname,
     		@RequestParam String firstname,
@@ -96,7 +97,7 @@ public class AuthController {
     		}
     		//personne.setDateNaissance(birthdate);
     		personneRepository.save(personne);
-    		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), email, password, Utilisateur.Visiblity.PUBLIC);
+    		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
             utilisateurRepository.save(utilisateur);
             session.setAttribute("id", personne.getId());
             return "<p style='color: green;'>Account successfully created</p>";
