@@ -64,8 +64,6 @@ export class FamilyTreeComponent implements OnInit {
       }
     }
     
-    console.log(this.linkDataArray);
-    console.log(this.data);
     // Modèle de données
     this.diagram.model = new go.GraphLinksModel(this.data, this.linkDataArray);
 

@@ -53,7 +53,7 @@ npm install
 - Compile the Angular application in production mode:
 
 ```
-ng build-prod
+ng build
 ```
 
 The files will be generated in the `src/main/resources/static` directory of the backend.
@@ -83,7 +83,7 @@ mvnw spring-boot:run
 - or with:
 
 ```
-java -jar target\findyourfather-1.0.jar
+java -jar target\find-your-father.jar
 ```
 
 Your application is now accessible at `http://localhost:8080`.
