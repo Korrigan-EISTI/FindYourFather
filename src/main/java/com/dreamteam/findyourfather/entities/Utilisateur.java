@@ -20,6 +20,7 @@ public class Utilisateur implements Serializable{
 	@Id @GeneratedValue
 	private Long id;
 	private Long idPersonne;
+	private Long phoneNumber;
 	private String email;
 	private String mdp;
 	private Visiblity visibilityLevel;
@@ -28,10 +29,11 @@ public class Utilisateur implements Serializable{
 		super();
 	}
 	
-	public Utilisateur(Long id, Long idPersonne, String email, String mdp, Visiblity visibilityLevel) {
+	public Utilisateur(Long id, Long idPersonne, Long phoneNumber, String email, String mdp, Visiblity visibilityLevel) {
 		super();
 		this.id = id;
 		this.idPersonne = idPersonne;
+		this.setPhoneNumber(phoneNumber);
 		this.email = email;
 		this.mdp = mdp;
 		this.visibilityLevel = visibilityLevel;
@@ -52,6 +54,14 @@ public class Utilisateur implements Serializable{
 	public void setIdPersonne(Long idPersonne) {
 		this.idPersonne = idPersonne;
 	}
+	
+	public Long getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(Long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}	
 
 	public String getEmail() {
 		return email;
@@ -75,5 +85,5 @@ public class Utilisateur implements Serializable{
 
 	public void setVisibilityLevel(Visiblity visibilityLevel) {
 		this.visibilityLevel = visibilityLevel;
-	}	
+	}
 }

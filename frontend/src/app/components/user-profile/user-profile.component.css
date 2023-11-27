@@ -7,4 +7,67 @@
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
 	padding: 2%;
 	background-color: #ffffff;
+	overflow-y: auto;
+}
+
+#user-profile-main-div::-webkit-scrollbar {
+	display: none;
+}
+
+.user-profile-content {
+	padding-left: 3%;
+	padding-right: 3%;
+}
+
+#user-profile-main-div h2 {
+	color: var(--main-color);
+	font-size: 1.5em;
+	margin-bottom: 3%;
+	margin-top:0%;
+}
+
+.profile-section {
+	margin-left: 2%;
+	margin-bottom: 2%;
+}
+
+.profile-section label {
+	display: inline-block;
+	width: 150px;
+	font-weight: bold;
+}
+
+.profile-section span {
+	display: inline-block;
+	width: calc(100% - 150px);
+}
+
+.editable-fields {
+	margin-top: 2%;
+}
+
+.editable-fields label,
+.editable-fields input {
+	margin-bottom: 1%;
+}
+
+.profile-button-div {
+	text-align: right;
+}
+
+button {
+	background-color: var(--main-color);
+	color: #ffffff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: filter 0.3s;
+	margin-left:1%;
+}
+
+button:hover {
+	background-color: var(--main-color);
+	filter: brightness(0.8);
+	color: #ffffff;
 }

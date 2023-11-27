@@ -1,3 +1,99 @@
 <div id="user-profile-main-div">
-    <p>Profil avec informations personnelles modifiables</p>
+	<h2>Personal Data</h2>
+	
+	<!-- Simple Display -->
+	<div *ngIf="!editMode" class="user-profile-content">
+		<div class="profile-section">
+			<label>Social Security Number:</label>
+			<span>{{ userProfile.numeroSecu }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Last Name:</label>
+			<span>{{ userProfile.nom }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>First Name:</label>
+			<span>{{ userProfile.prenom }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Email:</label>
+			<span>{{ userProfile.email }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Birthdate:</label>
+			<span>{{ userProfile.naissance }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Nationality:</label>
+			<span>{{ userProfile.nationalite }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Gender:</label>
+			<span>{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Phone Number:</label>
+			<span>{{ userProfile.phoneNumber }}</span>
+		</div>
+	
+		<div class="profile-button-div">
+			<button (click)="toggleEditFields()">Edit Fields</button>
+		</div>
+	</div>
+	
+	<!-- Editing Display -->
+	<div *ngIf="editMode" class="user-profile-content">
+		<div class="profile-section">
+			<label>Social Security Number:</label>
+			<span>{{ userProfile.numeroSecu }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Last Name:</label>
+			<span>{{ userProfile.nom }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>First Name:</label>
+			<span>{{ userProfile.prenom }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Email:</label>
+			<input [(ngModel)]="userProfile.email" />
+		</div>
+	
+		<div class="profile-section">
+			<label>Birthdate:</label>
+			<span>{{ userProfile.naissance }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Nationality:</label>
+			<input [(ngModel)]="userProfile.nationalite" />
+		</div>
+	
+		<div class="profile-section">
+			<label>Gender:</label>
+			<span>{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+		</div>
+	
+		<div class="profile-section">
+			<label>Phone Number:</label>
+			<input [(ngModel)]="userProfile.phoneNumber" />
+		</div>
+	
+		<div class="profile-button-div">
+			<button (click)="toggleEditFields()">Cancel</button>
+			<button (click)="saveChanges()">Save Changes</button>
+		</div>
+	</div>
+	
 </div>
