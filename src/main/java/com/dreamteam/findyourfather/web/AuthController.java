@@ -95,7 +95,7 @@ public class AuthController {
     		else {
     			personne.setGenre(Genre.FEMME);
     		}
-    		//personne.setDateNaissance(birthdate);
+    		personne.setNaissance(birthdate);
     		personneRepository.save(personne);
     		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
             utilisateurRepository.save(utilisateur);

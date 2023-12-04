@@ -11,6 +11,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { TreeElementComponent } from './components/dashboard/tree-element/tree-element.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './components/home/home.component';
     AuthComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    TreeElementComponent
   ],
   imports: [
     FormsModule,
