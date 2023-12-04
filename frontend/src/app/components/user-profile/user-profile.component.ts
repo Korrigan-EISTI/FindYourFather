@@ -1,26 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 export class UserProfile {
-	numeroSecu: string;
-	nom: string;
-	prenom: string;
 	email: string;
-	naissance: string;
 	nationalite: string;
 	genre: number;
 	phoneNumber: string;
 
 	constructor() {
-		this.numeroSecu = '';
-		this.nom = '';
-		this.prenom = '';
 		this.email = '';
-		this.naissance = '';
 		this.nationalite = '';
 		this.genre = 0;
 		this.phoneNumber = '';
 	}
 }
+
+export class PersonneProfile {
+	numeroSecu: string;
+	nom: string;
+	prenom: string;
+	naissance: string;
+	nationalite: string;
+
+	constructor() {
+		this.numeroSecu = '';
+		this.nom = '';
+		this.prenom = '';
+		this.naissance = '';
+		this.nationalite = '';
+	}
+}
+
 
 @Component({
 	selector: 'app-user-profile',
@@ -30,17 +40,12 @@ export class UserProfile {
 export class UserProfileComponent implements OnInit {
 
 	userProfile: UserProfile = new UserProfile();
+	personne: PersonneProfile = new PersonneProfile();
 	editMode: boolean = false;
 
+	constructor(private router: Router) { }
 	ngOnInit(): void {
-		this.userProfile.numeroSecu = '012345678901';
-		this.userProfile.nom = 'Doe';
-		this.userProfile.prenom = 'John';
-		this.userProfile.email = 'john.doe@example.com';
-		this.userProfile.naissance = '01/01/1990';
-		this.userProfile.nationalite = 'French';
-		this.userProfile.genre = 1;
-		this.userProfile.phoneNumber = '06 15 15 15 15';
+		this.showUser();
 	}
 
 	toggleEditFields(): void {
@@ -48,6 +53,82 @@ export class UserProfileComponent implements OnInit {
 	}
 
 	saveChanges(): void {
-		//TODO
+		const saveUser = "/saveUser";
+		fetch(saveUser, {
+      		method: 'post',
+      		body : new URLSearchParams(this.userProfile as any)
+    	}).then(response =>  {
+      		if (!response.ok) {
+				throw new Error(response.statusText);
+			}
+			
+    	});
+    	const savePers = "/savePers";
+		fetch(savePers, {
+      		method: 'post',
+      		body : new URLSearchParams(this.personne as any)
+    	}).then(response =>  {
+      		if (!response.ok) {
+				throw new Error(response.statusText);
+			}
+			
+    	});
+    	this.router.navigate(['/index']);
+	}
+	
+	public showUser(){
+		const urlUser = '/showUser';
+    	fetch(urlUser, {
+      	method: 'post',
+    	}).then(response =>  {
+      	response.json().then(data => {
+        	this.userProfile = data;
+        	this.userProfile.phoneNumber = '0' + this.userProfile.phoneNumber;
+      		});
+    	});
+    	
+    	const urlPers = '/showPers';
+
+    	fetch(urlPers, {
+      	method: 'post',
+    	}).then(response =>  {
+      	response.json().then(data => {
+        	this.personne = data;
+        	console.log(data);
+      		});
+    	});
+	}
+	
+	public saveNationality(e : any){
+		this.personne.nationalite = e.target.value;
+	}
+	
+	public saveEmail(e : any){
+		const email = e.target.value;
+		const regex : RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+		if (!regex.test(email))
+			return;
+		
+		this.userProfile.email = email;
+	}
+	
+	public savePhone(e : any){
+		const phone: String = e.target.value;
+		const p : String = this.normalizePhoneNumber(phone);
+		
+		if (p.length != 10)
+			return;
+			
+		this.personne.nationalite = e.target.value;
+	}
+	
+	private normalizePhoneNumber(phone : String) {
+		const p : Array<string> = phone.split(" "); 
+		let str : string = "";
+		for (let i = 0; i < p.length; i++){
+			str += p[i];
+		}		
+		return str;
 	}
 }

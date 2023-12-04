@@ -5,17 +5,17 @@
 	<div *ngIf="!editMode" class="user-profile-content">
 		<div class="profile-section">
 			<label>Social Security Number:</label>
-			<span>{{ userProfile.numeroSecu }}</span>
+			<span>{{ personne.numeroSecu }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>Last Name:</label>
-			<span>{{ userProfile.nom }}</span>
+			<span>{{ personne.nom }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>First Name:</label>
-			<span>{{ userProfile.prenom }}</span>
+			<span>{{ personne.prenom }}</span>
 		</div>
 	
 		<div class="profile-section">
@@ -25,12 +25,12 @@
 	
 		<div class="profile-section">
 			<label>Birthdate:</label>
-			<span>{{ userProfile.naissance }}</span>
+			<span>{{ personne.naissance }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>Nationality:</label>
-			<span>{{ userProfile.nationalite }}</span>
+			<span>{{ personne.nationalite }}</span>
 		</div>
 	
 		<div class="profile-section">
@@ -52,32 +52,32 @@
 	<div *ngIf="editMode" class="user-profile-content">
 		<div class="profile-section">
 			<label>Social Security Number:</label>
-			<span>{{ userProfile.numeroSecu }}</span>
+			<span>{{ personne.numeroSecu }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>Last Name:</label>
-			<span>{{ userProfile.nom }}</span>
+			<span>{{ personne.nom }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>First Name:</label>
-			<span>{{ userProfile.prenom }}</span>
+			<span>{{ personne.prenom }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>Email:</label>
-			<input [(ngModel)]="userProfile.email" />
+			<input [(ngModel)]="userProfile.email" (change)="saveEmail($event)"/>
 		</div>
 	
 		<div class="profile-section">
 			<label>Birthdate:</label>
-			<span>{{ userProfile.naissance }}</span>
+			<span>{{ personne.naissance }}</span>
 		</div>
 	
 		<div class="profile-section">
 			<label>Nationality:</label>
-			<input [(ngModel)]="userProfile.nationalite" />
+			<input [(ngModel)]="personne.nationalite" (change)="saveNationality($event)"/>
 		</div>
 	
 		<div class="profile-section">
@@ -87,7 +87,7 @@
 	
 		<div class="profile-section">
 			<label>Phone Number:</label>
-			<input [(ngModel)]="userProfile.phoneNumber" />
+			<input [(ngModel)]="userProfile.phoneNumber" (change)="savePhone($event)" />
 		</div>
 	
 		<div class="profile-button-div">
