@@ -48,18 +48,19 @@
 	border-radius: 5px;
 }
 
-button[type="submit"] {
+button {
 	background-color: var(--main-color);
 	color: #ffffff;
 	padding: 10px 20px;
 	margin-top: 5%;
+	margin-right: 1%;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	transition: filter 0.3s;
 }
 
-button[type="submit"]:hover {
+button:hover {
 	background-color: var(--main-color);
 	filter: brightness(0.8);
 	color: #ffffff;

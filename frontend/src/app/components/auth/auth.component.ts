@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 	formData: any = {};
+	logged: boolean = false;
 	
 	onRegisterSubmit() {
 		const form: HTMLFormElement = document.getElementById('registerForm') as HTMLFormElement;
@@ -40,7 +41,11 @@ export class AuthComponent {
 			}
 			response.text().then(text => (document.getElementById("loginStatus")!.innerHTML = text));
 		});
-
+		this.logged = true;
 		return false;
+	}
+	
+	logout() {
+		this.logged = false;
 	}
 }

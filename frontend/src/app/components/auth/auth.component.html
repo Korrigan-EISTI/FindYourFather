@@ -10,8 +10,11 @@
 				<label for="loginPassword">Password</label>
 				<input type="password" id="loginPassword" name="password" [(ngModel)]="formData.password" required>
 			</div>
-			<button type="submit">Login</button>
-			<p id="loginStatus"></p>
+			<div id="loginButtons">
+				<button type="submit">Login</button>
+				<button *ngIf="logged" (click)="logout()">Logout</button>
+			</div>
+			<br><br><p id="loginStatus"></p>
 		</form>
 	</div>
 	<div class="right-column">
