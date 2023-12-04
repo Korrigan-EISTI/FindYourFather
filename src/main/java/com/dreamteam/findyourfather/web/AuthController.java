@@ -113,11 +113,10 @@ public class AuthController {
     		Utilisateur utilisateur = utilisateurs.get(0);
     		if(utilisateur.getMdp().equals(password)) {
     			session.setAttribute("user",utilisateur.getId());
-            	return "<p style='color: green;'>You are now logged as "+utilisateur.getEmail()+"</p>";
+            	return "<p style='color: green;'>You are now logged as '"+utilisateur.getEmail()+"'.</p>";
     		}
-        	return "<p style='color: red;'>Wrong password</p>";
     	}
-    	return "<p style='color: red;'>Wrong email</p>";
+    	return "<p style='color: red;'>The email/password combination is incorrect.</p>";
     }
 }
 

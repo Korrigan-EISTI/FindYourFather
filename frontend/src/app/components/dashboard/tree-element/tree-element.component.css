@@ -1,0 +1,29 @@
+div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  color: white;
+  font-weight: bold;
+  width: 3%;
+  height: 3%;
+  margin: 1%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+button:hover {
+  filter: brightness(0.8);
+}
+
+.addConnexion {
+  background-color: green;
+}
+
+.deleteConnexion {
+  background-color: red;
+}
