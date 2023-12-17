@@ -35,7 +35,7 @@
 	
 		<div class="profile-section">
 			<label>Gender:</label>
-			<span>{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+			<span *ngIf="personne.numeroSecu">{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
 		</div>
 	
 		<div class="profile-section">

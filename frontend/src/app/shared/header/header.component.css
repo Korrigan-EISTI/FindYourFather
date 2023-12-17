@@ -1,8 +1,8 @@
 header {
   background-color: white;
   border-bottom: lightgray 4px solid;
-  border-radius: 0 0 70em 70em;
-  padding: 2%;
+  padding: 1.5%;
+  margin-bottom: 0.5%;
   text-align: center;
 }
 
@@ -12,7 +12,6 @@ header {
   padding: 0;
   display: flex;
   justify-content: space-around;
-  border-radius: 5px;
 }
 
 .menu-item {
