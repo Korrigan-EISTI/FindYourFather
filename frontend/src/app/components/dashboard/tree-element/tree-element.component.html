@@ -4,18 +4,18 @@
 			<p>{{personne!.prenom}} {{personne!.nom}}</p>
 		</div>
 		<div>
-			<button class="addConnexion" (click)="addingConnexionForm_ShowButton()">+</button>
-			<button class="deleteConnexion" (click)="removingConnexionForm_ShowButton()">-</button>
+			<button class="personneDataButton" (click)="addingConnexionForm_ShowButton()">+</button>
+			<button class="personneDataButton" (click)="removingConnexionForm_ShowButton()">-</button>
 		</div>
 	</div>
 	
-	<div class="editingLinkDiv">
-		<div *ngIf="showingAddingConnexionForm">
-			<p>Add test</p>
+	<div>
+		<div *ngIf="showingAddingConnexionForm" class="editingLinkDiv">
+			<p><b>TODO:</b> Formulaire de création de lien</p>
 		</div>
 		
-		<div *ngIf="showingRemovingConnexionForm">
-			<p>Remove test</p>
+		<div *ngIf="showingRemovingConnexionForm" class="editingLinkDiv">
+			<p><b>TODO:</b> Formulaire de suppression de lien</p>
 		</div>
 	</div>
 </div>
