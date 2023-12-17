@@ -1,4 +1,4 @@
-div {
+.personneData {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +10,7 @@ button {
   width: 3%;
   height: 3%;
   margin: 1%;
+  padding: 1%;
   border: none;
   border-radius: 5px;
   cursor: pointer;

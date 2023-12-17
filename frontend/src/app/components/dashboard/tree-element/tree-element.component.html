@@ -1,6 +1,17 @@
 <div>
-	<p>{{personne!.prenom}} {{personne!.nom}}</p>
-	<button class="addConnexion">+</button>
-	<button class="deleteConnexion">-</button>
+	<div class="personneData">
+		<p>{{personne!.prenom}} {{personne!.nom}}</p>
+		<button class="addConnexion" (click)="addingConnexionFormShowButton()">+</button>
+		<button class="deleteConnexion" (click)="removingConnexionFormShowButton()">-</button>
+	</div>
+	<div class="editingLinkDiv">
+		<div *ngIf="showingAddingConnexionForm">
+			<p>Add test</p>
+		</div>
+		
+		<div *ngIf="showingRemovingConnexionForm">
+			<p>Remove test</p>
+		</div>
+	</div>
 </div>
 <br>

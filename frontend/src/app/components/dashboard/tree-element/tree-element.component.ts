@@ -6,19 +6,33 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./tree-element.component.css']
 })
 export class TreeElementComponent {
-  @Input()
-  personne: {
-    id: number;
-    key: number;
-    numeroSecu: number;
-    nom: string;
-    prenom: string;
-    naissance: string;
-    dateNaissance: string;
-    dateDeces: string;
-    nationalite: string;
-    genre: number;
-    pere?: number;
-    mere?: number;
-  }|undefined=undefined;
+	
+	public showingAddingConnexionForm = false;
+	public showingRemovingConnexionForm = false;
+	
+	@Input()
+	personne: {
+	    id: number;
+	    key: number;
+	    numeroSecu: number;
+	    nom: string;
+	    prenom: string;
+	    naissance: string;
+	    dateNaissance: string;
+	    dateDeces: string;
+	    nationalite: string;
+	    genre: number;
+	    pere?: number;
+	    mere?: number;
+	}|undefined=undefined;
+	
+	addingConnexionFormShowButton(){
+		this.showingAddingConnexionForm=true;
+		this.showingRemovingConnexionForm=false;
+	}
+	
+	removingConnexionFormShowButton(){
+		this.showingAddingConnexionForm=false;
+		this.showingRemovingConnexionForm=true;
+	}
 }

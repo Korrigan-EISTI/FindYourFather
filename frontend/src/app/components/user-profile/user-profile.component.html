@@ -43,7 +43,7 @@
 			<span>{{ userProfile.phoneNumber }}</span>
 		</div>
 	
-		<div class="profile-button-div">
+		<div *ngIf="personne.numeroSecu" class="profile-button-div">
 			<button (click)="toggleEditFields()">Edit Fields</button>
 		</div>
 	</div>
@@ -82,7 +82,7 @@
 	
 		<div class="profile-section">
 			<label>Gender:</label>
-			<span>{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+			<span *ngIf="personne.numeroSecu">{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
 		</div>
 	
 		<div class="profile-section">
