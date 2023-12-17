@@ -26,13 +26,21 @@ export class TreeElementComponent {
 	    mere?: number;
 	}|undefined=undefined;
 	
-	addingConnexionFormShowButton(){
-		this.showingAddingConnexionForm=true;
-		this.showingRemovingConnexionForm=false;
+	addingConnexionForm_ShowButton(){
+		if(this.showingAddingConnexionForm==true && this.showingRemovingConnexionForm==false) {
+			this.showingAddingConnexionForm=false;
+		} else {
+			this.showingAddingConnexionForm=true;
+			this.showingRemovingConnexionForm=false;
+		}
 	}
 	
-	removingConnexionFormShowButton(){
-		this.showingAddingConnexionForm=false;
-		this.showingRemovingConnexionForm=true;
+	removingConnexionForm_ShowButton(){
+		if(this.showingAddingConnexionForm==false && this.showingRemovingConnexionForm==true) {
+			this.showingRemovingConnexionForm=false;
+		} else {
+			this.showingAddingConnexionForm=false;
+			this.showingRemovingConnexionForm=true;
+		}
 	}
 }

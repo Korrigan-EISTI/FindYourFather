@@ -1,4 +1,4 @@
-import { Component, ComponentRef, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { TreeElementComponent } from './tree-element/tree-element.component';
 
 @Component({
@@ -10,21 +10,6 @@ export class DashboardComponent {
 	@ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
 
 	ref!: ComponentRef<TreeElementComponent>;
-
-	private data: {
-		id: number;
-		key: number;
-		numeroSecu: number;
-		nom: string;
-		prenom: string;
-		naissance: string;
-		dateNaissance: string;
-		dateDeces: string;
-		nationalite: string;
-		genre: number;
-		pere?: number;
-		mere?: number;
-	}[] = [];
 
 	components = [];
 
@@ -52,89 +37,31 @@ export class DashboardComponent {
 	}
 
 	private getStaticData() {
-		return [
-			{
-				"id": 0,
-				"numeroSecu": 444444440,
-				"nom": "MODE",
-				"prenom": "TEST",
-				"naissance": "00/00/0000",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "HOMME",
-				"pere": null,
-				"mere": null,
-				"key": 6
-			},
-			{
-				"id": 5,
-				"numeroSecu": 444444444,
-				"nom": "Doe",
-				"prenom": "Alice",
-				"naissance": "01/01/1945",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "FEMME",
-				"pere": null,
-				"mere": null,
-				"key": 5
-			},
-			{
-				"id": 3,
-				"numeroSecu": 222222222,
-				"nom": "Doe",
-				"prenom": "Mary",
-				"naissance": "01/01/1970",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "FEMME",
-				"pere": null,
-				"mere": null,
-				"key": 3
-			},
-			{
-				"id": 1,
-				"numeroSecu": 123456789,
-				"nom": "Doe",
-				"prenom": "John",
-				"naissance": "01/01/1990",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "HOMME",
-				"pere": 2,
-				"mere": 3,
-				"key": 1
-			},
-			{
-				"id": 4,
-				"numeroSecu": 333333333,
-				"nom": "Doe",
-				"prenom": "George",
-				"naissance": "01/01/1940",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "HOMME",
-				"pere": null,
-				"mere": null,
-				"key": 4
-			},
-			{
-				"id": 2,
-				"numeroSecu": 111111111,
-				"nom": "Doe",
-				"prenom": "Peter",
-				"naissance": "01/01/1965",
-				"dateDeces": null,
-				"nationalite": "French",
-				"genre": "HOMME",
-				"pere": 4,
-				"mere": 5,
-				"key": 2
-			}
-		];
-	}
+    const staticData = [];
+
+    for (let i = 1; i <= 15; i++) {
+        const randomNumber = Math.floor(Math.random() * 900000000) + 100000000;
+
+        staticData.push({
+            "id": i,
+            "numeroSecu": randomNumber,
+            "nom": `Nom${i}`,
+            "prenom": `Prenom${i}`,
+            "naissance": "00/00/0000",
+            "dateDeces": null,
+            "nationalite": "French",
+            "genre": i % 2 === 0 ? "FEMME" : "HOMME",
+            "pere": null,
+            "mere": null,
+            "key": i
+        });
+    }
+
+    return staticData;
+}
+
 	
-	private getDataFromBackend(): Promise<any[]> {
+	private async getDataFromBackend(): Promise<any[]> {
 		const url = '/showTree';
 		return fetch(url, { method: 'post' })
 	    	.then(response => response.json());

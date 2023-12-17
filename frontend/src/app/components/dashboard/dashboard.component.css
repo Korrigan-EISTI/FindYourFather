@@ -16,11 +16,20 @@
 }
 
 #left-panel {
-  flex: 1;
-  background-color: #f2f2f2;
+ 	flex: 1;
+ 	background-color: #f2f2f2;
+}
+
+#left-panel::-webkit-scrollbar {
+	display: none;
 }
 
 #right-panel {
-  flex: 3;
-  background-color: #ffffff;
+ 	flex: 3;
+ 	background-color: #ffffff;
+ 	overflow-y: auto;
+}
+
+#right-panel::-webkit-scrollbar {
+	display: none;
 }
