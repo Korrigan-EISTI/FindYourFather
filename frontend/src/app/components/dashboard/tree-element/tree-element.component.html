@@ -11,11 +11,59 @@
 	
 	<div>
 		<div *ngIf="showingAddingConnexionForm" class="editingLinkDiv">
-			<p><b>TODO:</b> Formulaire de création de lien</p>
+		    <form class="family-tree-form">
+		    	<br>
+		        <label for="relationToAddSelect">Relation :</label>
+		        <select id="relationToAddSelect" name="relationToAdd" required>
+		        	<option value=""></option>
+		            <option value="child">Child</option>
+		            <option value="father">Father</option>
+		            <option value="mother">Mother</option>
+		        </select>
+				<br>
+		        <div class="form-group">
+		            <label for="lastNameInput">Last Name :</label>
+		            <input type="text" id="lastNameInput" name="lastName" required>
+		        </div>
+				<br>
+		        <div class="form-group">
+		            <label for="firstNameInput">First Name :</label>
+		            <input type="text" id="firstNameInput" name="firstName" required>
+		        </div>
+				<br>
+		        <div class="form-group">
+		            <label for="birthdateInput">Birthdate :</label>
+		            <input type="date" id="birthdateInput" name="birthdate">
+		        </div>
+				<br>
+		        <div class="form-group">
+		            <label for="nationalityInput">Nationality :</label>
+		            <input type="text" id="nationalityInput" name="nationality">
+		        </div>
+				<br>
+		        <div class="form-group">
+		            <label for="genderSelect">Gender :</label>
+		            <select id="genderSelect" name="gender" required>
+		            	<option value=""></option>
+		                <option value="homme">Male</option>
+		                <option value="femme">Female</option>
+		            </select>
+		        </div>
+				<br>
+		        <button type="submit">Add relation</button>
+		    </form>
 		</div>
 		
 		<div *ngIf="showingRemovingConnexionForm" class="editingLinkDiv">
-			<p><b>TODO:</b> Formulaire de suppression de lien</p>
+			<form class="family-tree-form">
+		    	<br>
+		        <label for="relationToRemoveSelect">Relation :</label>
+		        <select id="relationToRemoveSelect" name="relationToRemove" required>
+		        	<option value="TODO">Là il faudrait lister dynamiquement les liens directs de la personne</option>
+		        </select>
+				<br>
+		        <button type="submit">Remove relation</button>
+		    </form>
 		</div>
 	</div>
 </div>

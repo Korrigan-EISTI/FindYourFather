@@ -10,19 +10,21 @@ export class DashboardComponent {
 	@ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
 
 	ref!: ComponentRef<TreeElementComponent>;
+	
+	devEnvironment = false;
 
 	components = [];
 
 	ngOnInit() {
 		setTimeout(() => {
-			this.getPersonnes(true);
+			this.getPersonnes(this.devEnvironment);
 		});
 	}
 	
-	public getPersonnes(test: boolean) {
+	public getPersonnes(areWeInDevEnvironment: boolean) {
 		let promise: Promise<any[]>;
 		
-		if (test) {
+		if (areWeInDevEnvironment) {
 			promise = Promise.resolve(this.getStaticData());
 		} else {
 			promise = this.getDataFromBackend();
