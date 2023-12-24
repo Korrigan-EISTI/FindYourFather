@@ -11,12 +11,12 @@ VALUES
   (1, 123456789, 'Doe', 'John', NULL, 'French', 1, '01/01/1990', NULL, NULL),
   
   -- Parents
-  (2, 111111111, 'Doe', 'Peter', NULL, 'French', 1, '01/01/1965', NULL, NULL), -- Père
-  (3, 222222222, 'Doe', 'Mary', NULL, 'French', 0, '01/01/1970', NULL, NULL), -- Mère
+  (2, 111111111, 'Doe', 'Peter', NULL, 'French', 1, '1965-01-01', NULL, NULL), -- Père
+  (3, 222222222, 'Doe', 'Mary', NULL, 'French', 0, '1970-01-01', NULL, NULL), -- Mère
 
   -- Grands-parents
-  (4, 333333333, 'Doe', 'George', NULL, 'French', 1, '01/01/1940', NULL, NULL), -- Grand-père paternel
-  (5, 444444444, 'Doe', 'Alice', NULL, 'French', 0, '01/01/1945', NULL, NULL); -- Grand-mère paternelle
+  (4, 333333333, 'Doe', 'George', NULL, 'French', 1, '1940-01-01', NULL, NULL), -- Grand-père paternel
+  (5, 444444444, 'Doe', 'Alice', NULL, 'French', 0, '1945-01-01',NULL, NULL); -- Grand-mère paternelle
 
 -- Liaison des individus dans la famille
 UPDATE personne SET pere = 2, mere = 3 WHERE id = 1; -- Enfant lié aux parents

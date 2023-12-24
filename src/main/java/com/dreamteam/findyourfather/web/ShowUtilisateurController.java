@@ -3,7 +3,6 @@ package com.dreamteam.findyourfather.web;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,7 +29,7 @@ public class ShowUtilisateurController {
 		
 		if (session.getAttribute("user") == null)
 			return null;
-		
+		System.out.println("Oui");
 		Utilisateur user = utilisateurRepository.findById((Long) session.getAttribute("user")).get();
 		return user;
 	}
@@ -47,7 +46,7 @@ public class ShowUtilisateurController {
 		return pers;
 	}
 	
-	@PostMapping(path = "/saveUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/saveUser")
 	
 	public @ResponseBody void saveUser(HttpSession session, @RequestParam String email, @RequestParam Long phoneNumber){
 		Utilisateur user = utilisateurRepository.findById((Long) session.getAttribute("user")).get();
@@ -56,7 +55,7 @@ public class ShowUtilisateurController {
 		utilisateurRepository.save(user);
 	}
 	
-@PostMapping(path = "/savePers", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/savePers")
 	
 	public @ResponseBody void savePers(HttpSession session, @RequestParam String genre, @RequestParam String nationalite){
 		Utilisateur user = utilisateurRepository.findById((Long) session.getAttribute("user")).get();

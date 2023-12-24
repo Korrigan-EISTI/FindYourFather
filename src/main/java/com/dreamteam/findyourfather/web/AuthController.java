@@ -82,25 +82,28 @@ public class AuthController {
     		@RequestParam String firstname,
     		@RequestParam String birthdate,
     		@RequestParam String nationality,
-    		@RequestParam String gender, HttpSession session) {
-    	System.out.println(email);
+    		@RequestParam String gender, 
+    		HttpSession session) {
     	
     	if(utilisateurRepository.findByEmail(email).size()==0){
-    		Personne personne = new Personne(ssn,lastname,firstname);
-    		personne.setNationalite(nationality);
-    		
-    		if(gender=="male") {
-    			personne.setGenre(Genre.HOMME);
+    		Personne pers = searchPersonne(lastname, firstname, birthdate);
+    		if (pers == null){
+    			pers = new Personne(ssn,lastname,firstname);
+    			pers.setNationalite(nationality);
+        		
+        		if(gender=="male") {
+        			pers.setGenre(Genre.HOMME);
+        		}
+        		else {
+        			pers.setGenre(Genre.FEMME);
+        		}
+        		pers.setNaissance(birthdate);
+        		personneRepository.save(pers);
+        		Utilisateur utilisateur = new Utilisateur(null, pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
+        		utilisateurRepository.save(utilisateur);
+        		return "<p style='color: green;'>Account successfully created</p>";
     		}
-    		else {
-    			personne.setGenre(Genre.FEMME);
-    		}
-    		personne.setNaissance(birthdate);
-    		personneRepository.save(personne);
-    		Utilisateur utilisateur = new Utilisateur(null, personne.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
-            utilisateurRepository.save(utilisateur);
-            session.setAttribute("id", personne.getId());
-            return "<p style='color: green;'>Account successfully created</p>";
+            return "exists";
     	}
     	return "<p style='color: red;'>This email is already used</p>";
     }
@@ -112,11 +115,44 @@ public class AuthController {
     	if(utilisateurs.size()>0) {
     		Utilisateur utilisateur = utilisateurs.get(0);
     		if(utilisateur.getMdp().equals(password)) {
-    			session.setAttribute("user",utilisateur.getId());
+    			session.setAttribute("user", utilisateur.getId());
             	return "<p style='color: green;'>You are now logged as '"+utilisateur.getEmail()+"'.</p>";
     		}
     	}
     	return "<p style='color: red;'>The email/password combination is incorrect.</p>";
     }
+    
+    @PostMapping(path="/registerAlreadyExisted",produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String registerAlreadyExisted(@RequestParam String email,
+    		@RequestParam String password,
+    		@RequestParam Long phoneNumber,
+    		@RequestParam Long ssn,
+    		@RequestParam String lastname,
+    		@RequestParam String firstname,
+    		@RequestParam String birthdate,
+    		@RequestParam String nationality,
+    		@RequestParam String gender, 
+    		HttpSession session) {
+    		System.out.println("Oui");
+    	if(utilisateurRepository.findByEmail(email).size()==0){
+    		Personne pers = searchPersonne(lastname, firstname, birthdate);
+    		Utilisateur utilisateur = new Utilisateur(null, pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
+            utilisateurRepository.save(utilisateur);
+            session.setAttribute("id", pers.getId());
+            return "<p style='color: green;'>Account successfully created</p>";
+            
+    	}
+    	return "<p style='color: red;'>This email is already used</p>";
+    }
+    
+    private Personne searchPersonne(String nom, String prenom, String naisssance) {
+		
+		try {
+			Personne pers = personneRepository.findByName(nom, prenom, naisssance);
+			return pers;
+		}catch(Exception e) {
+			return null;
+		}
+	}
 }
 
