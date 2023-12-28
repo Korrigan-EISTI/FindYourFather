@@ -99,7 +99,7 @@ public class AuthController {
         		}
         		pers.setNaissance(birthdate);
         		personneRepository.save(pers);
-        		Utilisateur utilisateur = new Utilisateur(null, pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
+        		Utilisateur utilisateur = new Utilisateur(pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
         		utilisateurRepository.save(utilisateur);
         		return "<p style='color: green;'>Account successfully created</p>";
     		}
@@ -136,7 +136,7 @@ public class AuthController {
     		System.out.println("Oui");
     	if(utilisateurRepository.findByEmail(email).size()==0){
     		Personne pers = searchPersonne(lastname, firstname, birthdate);
-    		Utilisateur utilisateur = new Utilisateur(null, pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
+    		Utilisateur utilisateur = new Utilisateur(pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);
             utilisateurRepository.save(utilisateur);
             session.setAttribute("id", pers.getId());
             return "<p style='color: green;'>Account successfully created</p>";

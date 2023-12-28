@@ -12,23 +12,26 @@ public class Invitation implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	public enum Status{
-		ACCEPTED,
 		WAITING,
+		ACCEPTED,
 		REFUSED
 	}
 	
-	@Id@GeneratedValue
+	@Id @GeneratedValue
 	private Long id;
-	private Long idUser1;
-	private Long idUser2;
+	private Long idUser;
+	private Long root;
+	private Long target;
+	private String relation;
 	private Status status;
 	
-	public Invitation(Long id, Long idUser1, Long idUser2, Status status) {
+	public Invitation(Long idUser, Long root, Long target,String relation, Status status) {
 		super();
-		this.id = id;
-		this.idUser1 = idUser1;
-		this.idUser2 = idUser2;
+		this.idUser= idUser;
+		this.root= root;
+		this.target= target;
 		this.status = status;
+		this.relation = relation;
 	}
 
 	public Long getId() {
@@ -39,22 +42,37 @@ public class Invitation implements Serializable{
 		this.id = id;
 	}
 
-	public Long getIdUser1() {
-		return idUser1;
+	public String getRelation() {
+		return relation;
 	}
 
-	public void setIdUser1(Long idUser1) {
-		this.idUser1 = idUser1;
+	public void setRelation(String relation) {
+		this.relation = relation;
 	}
 
-	public Long getIdUser2() {
-		return idUser2;
+	public Long getIdUser() {
+		return idUser;
 	}
 
-	public void setIdUser2(Long idUser2) {
-		this.idUser2 = idUser2;
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
+	public Long getRoot() {
+		return root;
+	}
+
+	public void setRoot(Long from) {
+		this.root = from;
+	}
+
+	public Long getTarget() {
+		return target;
+	}
+
+	public void setTarget(Long target) {
+		this.target = target;
+	}
 	public Status getStatus() {
 		return status;
 	}

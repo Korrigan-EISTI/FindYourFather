@@ -1,48 +1,98 @@
 package com.dreamteam.findyourfather.web;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.dreamteam.findyourfather.dao.InvitationRepository;
+import com.dreamteam.findyourfather.dao.PersonneRepository;
+import com.dreamteam.findyourfather.dao.UtilisateurRepository;
 import com.dreamteam.findyourfather.entities.Invitation;
+import com.dreamteam.findyourfather.entities.Personne;
+import com.dreamteam.findyourfather.entities.Utilisateur;
+
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/invitations")
+@RequestMapping("/invitation")
 public class InvitationController {
 
     private final InvitationRepository invitationRepository;
+    private final UtilisateurRepository utilisateurRepository;
+    private final PersonneRepository personneRepository;
 
-    public InvitationController(InvitationRepository invitationRepository) {
+    public InvitationController(InvitationRepository invitationRepository, UtilisateurRepository utilisateurRepository, PersonneRepository personneRepository) {
         this.invitationRepository = invitationRepository;
+		this.utilisateurRepository = utilisateurRepository;
+		this.personneRepository = personneRepository;
     }
 
-    @GetMapping("/")
-    public List<Invitation> getAllInvitations() {
-        return (List<Invitation>) invitationRepository.findAll();
+    @PostMapping(path = "/add",produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String addRelation(@RequestParam String relationToAdd,
+    		@RequestParam String lastName,
+    		@RequestParam String firstName,
+    		@RequestParam String birthdate,
+			@RequestParam Long ssn,
+    		@RequestParam String nationality,
+    		@RequestParam String gender,
+    		@RequestParam Long id,
+    		HttpSession session) {
+    	Personne personne = personneRepository.getReferenceById(id);
+    	Long target;
+    	if(relationToAdd.equals("father")) {
+    		if(personne.pere != null) {
+    			return "father already present";
+    		}
+    	}
+    	else if(relationToAdd.equals("mother")) {
+    		if(personne.mere != null) {
+    			return "mother already present";
+    		}
+    	}
+    	
+    	List<Personne> targets = personneRepository.findByNumeroSecu(ssn);
+		if(targets.size()>0) {
+			target = targets.get(0).getId();
+		}
+		else {
+			Personne p = personneRepository.save(new Personne(ssn,lastName,firstName));
+			p.setNaissance(birthdate);
+			p.setNationalite(nationality);
+			if(gender.equals("femme")) {
+				p.setGenre(Personne.Genre.FEMME);
+			}
+			else {
+				p.setGenre(Personne.Genre.HOMME);
+			}
+			target = p.getId();
+		}
+		List<Utilisateur> utilisateurs = utilisateurRepository.findByIdPersonne(target);
+		if(utilisateurs.size()==0) {
+	    	if(relationToAdd.equals("father")) {
+				personne.setPere(target);
+				personneRepository.save(personne);
+	    	}
+	    	else if(relationToAdd.equals("mother")){
+	    		personne.setMere(target);
+				personneRepository.save(personne);
+	    	}
+	    	else if(relationToAdd.equals("child")) {
+	    		Personne child = targets.get(0);
+	    		if(personne.getGenre().equals(Personne.Genre.HOMME)) {
+	    			child.setPere(id);
+	    		}
+	    		if(personne.getGenre().equals(Personne.Genre.FEMME)) {
+	    			child.setMere(id);
+	    		}
+				personneRepository.save(child);
+	    		
+	    	}
+			return "relation added";
+		}
+		else {
+			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd,Invitation.Status.WAITING));
+			return "invitation sent";
+		}
     }
 
-    @GetMapping("/{id}")
-    public Invitation getInvitationById(@PathVariable Long id) {
-        return invitationRepository.findById(id).orElse(null);
-    }
-
-    @PostMapping("/")
-    public void addInvitation(@RequestBody Invitation invitation) {
-        invitationRepository.save(invitation);
-    }
-
-    @PutMapping("/{id}")
-    public void updateInvitation(@PathVariable Long id, @RequestBody Invitation updatedInvitation) {
-        invitationRepository.findById(id).ifPresent(invitation -> {
-            invitation.setIdUser1(updatedInvitation.getIdUser1());
-            invitation.setIdUser2(updatedInvitation.getIdUser2());
-            invitation.setStatus(updatedInvitation.getStatus());
-            invitationRepository.save(invitation);
-        });
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteInvitation(@PathVariable Long id) {
-        invitationRepository.deleteById(id);
-    }
 }

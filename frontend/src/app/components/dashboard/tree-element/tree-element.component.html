@@ -11,7 +11,7 @@
 	
 	<div>
 		<div *ngIf="showingAddingConnexionForm" class="editingLinkDiv">
-		    <form class="family-tree-form">
+		    <form id="add-relation-form" class="family-tree-form">
 		    	<br>
 		        <label for="relationToAddSelect">Relation :</label>
 		        <select id="relationToAddSelect" name="relationToAdd" required>
@@ -37,6 +37,11 @@
 		        </div>
 				<br>
 		        <div class="form-group">
+		            <label for="ssnInput">SSN :</label>
+		            <input type="number" id="ssnInput" name="ssn" required>
+		        </div>
+				<br>
+		        <div class="form-group">
 		            <label for="nationalityInput">Nationality :</label>
 		            <input type="text" id="nationalityInput" name="nationality">
 		        </div>
@@ -50,7 +55,7 @@
 		            </select>
 		        </div>
 				<br>
-		        <button type="submit">Add relation</button>
+		        <button type="submit" (click)="addRelation()">Add relation</button>
 		    </form>
 		</div>
 		

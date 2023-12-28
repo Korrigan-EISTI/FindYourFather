@@ -43,4 +43,21 @@ export class TreeElementComponent {
 			this.showingRemovingConnexionForm=true;
 		}
 	}
+	addRelation(){
+		const form: HTMLFormElement = document.getElementById('add-relation-form') as HTMLFormElement;
+		const formData = new FormData(form);
+		formData.append("id",this.personne!.id.toString())
+		const url = '/invitation/add'; 
+		
+		fetch(url, {
+			method: 'post',
+			body: new URLSearchParams(formData as any)
+		}).then(response => {
+			if (!response.ok) {
+				throw new Error(response.statusText);
+			}
+			
+			response.text().then(text => {console.log(text);})
+		});
+	}
 }

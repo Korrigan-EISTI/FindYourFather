@@ -25,6 +25,7 @@ public class Personne implements Serializable{
 	private String dateDeces;
 	private String nationalite;
 	private Genre genre;
+
 	public Long pere;
 	public Long mere;
 	
@@ -56,6 +57,21 @@ public class Personne implements Serializable{
 		this.numeroSecu = numeroSecu;
 	}
 	
+	public Long getPere() {
+		return pere;
+	}
+
+	public void setPere(Long pere) {
+		this.pere = pere;
+	}
+
+	public Long getMere() {
+		return mere;
+	}
+
+	public void setMere(Long mere) {
+		this.mere = mere;
+	}
 	public String getNom() {
 		return nom;
 	}

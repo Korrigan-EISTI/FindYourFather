@@ -29,9 +29,8 @@ public class Utilisateur implements Serializable{
 		super();
 	}
 	
-	public Utilisateur(Long id, Long idPersonne, Long phoneNumber, String email, String mdp, Visiblity visibilityLevel) {
+	public Utilisateur(Long idPersonne, Long phoneNumber, String email, String mdp, Visiblity visibilityLevel) {
 		super();
-		this.id = id;
 		this.idPersonne = idPersonne;
 		this.setPhoneNumber(phoneNumber);
 		this.email = email;
