@@ -37,28 +37,23 @@ public class InvitationController {
     		@RequestParam String gender,
     		@RequestParam Long id,
     		HttpSession session) {
+    	
     	Personne personne = personneRepository.getReferenceById(id);
     	Long target;
-    	if(relationToAdd.equals("father")) {
-    		if(personne.pere != null) {
-    			return "father already present";
-    		}
-    	}
-    	else if(relationToAdd.equals("mother")) {
-    		if(personne.mere != null) {
-    			return "mother already present";
-    		}
-    	}
+    	
+    	//Checking already existing parental links before adding a parental relation
+    	if(relationToAdd.equals("father") && personne.pere != null) return "This person already has a father";
+    	else if(relationToAdd.equals("mother") && personne.mere != null) return "This person already has a mother";
     	
     	List<Personne> targets = personneRepository.findByNumeroSecu(ssn);
-		if(targets.size()>0) {
+    	if(targets.size()>0) {
 			target = targets.get(0).getId();
 		}
 		else {
 			Personne p = personneRepository.save(new Personne(ssn,lastName,firstName));
 			p.setNaissance(birthdate);
 			p.setNationalite(nationality);
-			if(gender.equals("femme")) {
+			if(gender.equals("female")) {
 				p.setGenre(Personne.Genre.FEMME);
 			}
 			else {
@@ -66,6 +61,7 @@ public class InvitationController {
 			}
 			target = p.getId();
 		}
+    	
 		List<Utilisateur> utilisateurs = utilisateurRepository.findByIdPersonne(target);
 		if(utilisateurs.size()==0) {
 	    	if(relationToAdd.equals("father")) {
@@ -87,11 +83,11 @@ public class InvitationController {
 				personneRepository.save(child);
 	    		
 	    	}
-			return "relation added";
+			return "Relation successfully created";
 		}
 		else {
 			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd,Invitation.Status.WAITING));
-			return "invitation sent";
+			return "Invitation sent";
 		}
     }
 
