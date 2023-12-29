@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("/invitation")
-public class InvitationController {
+@RequestMapping("/relation")
+public class RelationController {
 
     private final InvitationRepository invitationRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final PersonneRepository personneRepository;
 
-    public InvitationController(InvitationRepository invitationRepository, UtilisateurRepository utilisateurRepository, PersonneRepository personneRepository) {
+    public RelationController(InvitationRepository invitationRepository, UtilisateurRepository utilisateurRepository, PersonneRepository personneRepository) {
         this.invitationRepository = invitationRepository;
 		this.utilisateurRepository = utilisateurRepository;
 		this.personneRepository = personneRepository;

@@ -30,7 +30,9 @@ public class Invitation implements Serializable{
 	private Long target;
 	private String relation;
 	private Status status;
-	
+	public Invitation() {
+		super();
+	}
 	public Invitation(Long idUser, Long root, Long target,String relation, Status status) {
 		super();
 		this.idUser= idUser;

@@ -52,7 +52,10 @@ export class DashboardComponent {
 		}
 
 		promise.then((invitations: any[]) => {
+			console.log("invitations");
+			console.log(invitations);
 			invitations.forEach((invitation: any) => {
+				console.log(invitation);
 				// Création de invitation-element
 				const refInvitation = this.invitationVcr.createComponent(InvitationElementComponent);
 				refInvitation.instance.invitation = invitation;
