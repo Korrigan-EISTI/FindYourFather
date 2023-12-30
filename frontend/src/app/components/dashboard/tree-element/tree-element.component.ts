@@ -43,6 +43,7 @@ export class TreeElementComponent {
 			this.showingRemovingConnexionForm=true;
 		}
 	}
+	
 	addRelation(){
 		const form: HTMLFormElement = document.getElementById('add-relation-form') as HTMLFormElement;
 		const formData = new FormData(form);
