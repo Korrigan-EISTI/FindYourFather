@@ -86,7 +86,7 @@ public class InvitationController {
 			return "Relation successfully created";
 		}
 		else {
-			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd,Invitation.Status.WAITING));
+			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd,Invitation.Status.PENDING));
 			return "Invitation sent";
 		}
     }

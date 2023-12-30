@@ -1,71 +1,131 @@
-import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { TreeElementComponent } from './tree-element/tree-element.component';
+import { InvitationElementComponent } from './invitation-element/invitation-element.component';
 
 @Component({
-	selector: 'app-dashboard',
-	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-	@ViewChild("viewContainerRef", { read: ViewContainerRef }) vcr!: ViewContainerRef;
 
-	ref!: ComponentRef<TreeElementComponent>;
-	
+	@ViewChild("treeViewContainerRef", { read: ViewContainerRef }) treeVcr!: ViewContainerRef;
+	@ViewChild("invitationViewContainerRef", { read: ViewContainerRef }) invitationVcr!: ViewContainerRef;
+
 	devEnvironment = false;
-
-	components = [];
 
 	ngOnInit() {
 		setTimeout(() => {
 			this.getPersonnes(this.devEnvironment);
+			this.getInvitations(this.devEnvironment);
 		});
 	}
-	
+
 	public getPersonnes(areWeInDevEnvironment: boolean) {
 		let promise: Promise<any[]>;
-		
+
 		if (areWeInDevEnvironment) {
-			promise = Promise.resolve(this.getStaticData());
+			promise = this.getStaticPersonneData();
 		} else {
-			promise = this.getDataFromBackend();
+			promise = this.getPersonneDataFromBackend();
 		}
-	
+
 		promise.then((data: any[]) => {
 			data.forEach((personne: any) => {
-				let ref = this.vcr.createComponent(TreeElementComponent);
-				ref.instance.personne = personne;
+				// Création de tree-element
+				const refTreeElement = this.treeVcr.createComponent(TreeElementComponent);
+				refTreeElement.instance.personne = personne;
 			});
-		});
+		})
+			.catch(error => {
+				console.error('Erreur lors de la récupération des personnes :', error);
+			});
 	}
 
-	private getStaticData() {
-    const staticData = [];
+	public getInvitations(areWeInDevEnvironment: boolean) {
+		let promise: Promise<any[]>;
 
-    for (let i = 1; i <= 15; i++) {
-        const randomNumber = Math.floor(Math.random() * 900000000) + 100000000;
+		if (areWeInDevEnvironment) {
+			promise = this.getStaticInvitations();
+		} else {
+			promise = this.getInvitationsFromBackend();
+		}
 
-        staticData.push({
-            "id": i,
-            "numeroSecu": randomNumber,
-            "nom": `Nom${i}`,
-            "prenom": `Prenom${i}`,
-            "naissance": "00/00/0000",
-            "dateDeces": null,
-            "nationalite": "French",
-            "genre": i % 2 === 0 ? "FEMME" : "HOMME",
-            "pere": null,
-            "mere": null,
-            "key": i
-        });
-    }
+		promise.then((invitations: any[]) => {
+			invitations.forEach((invitation: any) => {
+				// Création de invitation-element
+				const refInvitation = this.invitationVcr.createComponent(InvitationElementComponent);
+				refInvitation.instance.invitation = invitation;
+			});
+		})
+			.catch(error => {
+				console.error('Erreur lors de la récupération des invitations :', error);
+			});
+	}
 
-    return staticData;
-}
+	private getStaticInvitations(): Promise<any[]> {
+		const staticInvitations = [];
 
-	
-	private async getDataFromBackend(): Promise<any[]> {
+		for (let i = 1; i <= 15; i++) {
+			const relation = i % 3 === 0 ? 'CHILD' : (i % 2 === 0 ? 'FATHER' : 'MOTHER');
+			const status = 'PENDING';
+
+			const invitation = {
+				id: i,
+				idUser: i + 100,
+				root: i + 200,
+				target: i + 300,
+				relation: relation,
+				status: status
+			};
+
+			staticInvitations.push(invitation);
+		}
+
+		return Promise.resolve(staticInvitations);
+	}
+
+	private async getInvitationsFromBackend(): Promise<any[]> {
+		const url = '/getInvitations';  // TODO : Mettre le bon endpoint
+		try {
+			const response = await fetch(url, { method: 'post' });
+			return response.json();
+		} catch (error) {
+			throw new Error('Erreur lors de la récupération des invitations depuis le backend.');
+		}
+	}
+
+	private getStaticPersonneData(): Promise<any[]> {
+		const staticData = [];
+
+		for (let i = 1; i <= 15; i++) {
+			const randomNumber = Math.floor(Math.random() * 900000000) + 100000000;
+
+			staticData.push({
+				"id": i,
+				"numeroSecu": randomNumber,
+				"nom": `Nom${i}`,
+				"prenom": `Prenom${i}`,
+				"naissance": "00/00/0000",
+				"dateDeces": null,
+				"nationalite": "French",
+				"genre": i % 2 === 0 ? "FEMME" : "HOMME",
+				"pere": null,
+				"mere": null,
+				"key": i
+			});
+		}
+
+		return Promise.resolve(staticData);
+	}
+
+	private async getPersonneDataFromBackend(): Promise<any[]> {
 		const url = '/showTree';
-		return fetch(url, { method: 'post' })
-	    	.then(response => response.json());
+		try {
+			const response = await fetch(url, { method: 'post' });
+			return response.json();
+		} catch (error) {
+			throw new Error('Erreur lors de la récupération des personnes depuis le backend.');
+		}
 	}
 }

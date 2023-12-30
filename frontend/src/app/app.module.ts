@@ -12,6 +12,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { TreeElementComponent } from './components/dashboard/tree-element/tree-element.component';
+import { InvitationElementComponent } from './components/dashboard/invitation-element/invitation-element.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,10 @@ import { TreeElementComponent } from './components/dashboard/tree-element/tree-e
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    TreeElementComponent
+    TreeElementComponent,
+    InvitationElementComponent
   ],
+  
   imports: [
     FormsModule,
     BrowserModule,
@@ -33,8 +36,7 @@ import { TreeElementComponent } from './components/dashboard/tree-element/tree-e
       { path: 'dashboard', component: DashboardComponent },
       { path: 'family-tree', component: FamilyTreeComponent },
       { path: 'user-profile', component: UserProfileComponent },
-      { path: 'auth', component: AuthComponent },
-      // Autres routes
+      { path: 'auth', component: AuthComponent }
     ]),
   ],
   providers: [],
