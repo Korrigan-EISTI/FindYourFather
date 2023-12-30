@@ -91,4 +91,44 @@ public class RelationController {
 		}
     }
 
+    @PostMapping(path = "/accept",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String acceptRelation(@RequestParam Long id,HttpSession session) {
+    	Invitation invitation = invitationRepository.getReferenceById(id);
+    	Long user = utilisateurRepository.findByIdPersonne(invitation.getTarget()).get(0).getId();
+    	if(!((Long)session.getAttribute("user")).equals(user)) {
+        	return "wrong user";
+    	}
+		String relation = invitation.getRelation();
+		Personne root = personneRepository.getReferenceById(invitation.getRoot());
+		if(relation.equals("father")) {
+			root.setPere(invitation.getTarget());
+			personneRepository.save(root);
+    	}
+    	else if(relation.equals("mother")){
+    		root.setMere(invitation.getTarget());
+			personneRepository.save(root);
+    	}
+    	else if(relation.equals("child")) {
+    		Personne target = personneRepository.getReferenceById(invitation.getTarget());
+    		if(root.getGenre().equals(Personne.Genre.HOMME)) {
+    			target.setPere(id);
+    		}
+    		if(root.getGenre().equals(Personne.Genre.FEMME)) {
+    			target.setMere(id);
+    		}
+			personneRepository.save(target);
+    	}
+		invitationRepository.deleteById(id);
+    	return "ok";
+    }
+
+    @PostMapping(path = "/refuse",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String refuseRelation(@RequestParam Long id,HttpSession session) {
+    	Invitation invitation = invitationRepository.getReferenceById(id);
+    	if((Long)session.getAttribute("user") == invitation.getIdUser()) {
+    		invitationRepository.deleteById(id);
+    	}
+		return "ok";
+    	
+    }
 }

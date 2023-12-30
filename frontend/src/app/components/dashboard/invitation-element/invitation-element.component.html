@@ -1,11 +1,11 @@
 <div>
 	<div class="invitationData">
 		<div id="invitationText">
-			<p>{{invitation!.root}} wants to be your {{invitation!.relation.toLowerCase()}}</p>
+			<p>{{invitation!.idUser}} wants you to be {{invitation!.root}}'s {{invitation!.relation.toLowerCase()}}</p>
 		</div>
 		<div id="invitationButtons">
-			<button class="invitationButton" (click)="acceptInvitation()">+</button>
-			<button class="invitationButton" (click)="refuseInvitation()">-</button>
+			<button class="invitationButton" (click)="acceptInvitation()">&#10003;</button>
+			<button class="invitationButton" (click)="refuseInvitation()">X</button>
 		</div>
 	</div>
 </div>

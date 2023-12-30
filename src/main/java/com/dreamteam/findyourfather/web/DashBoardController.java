@@ -33,7 +33,6 @@ public class DashBoardController {
     }
 	@PostMapping(path = "/getInvitations", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Invitation> getInvitations(HttpSession session){
-		System.out.println(""+(Long)session.getAttribute("user"));
 		return invitationRepository.findByTarget(utilisateurRepository.getReferenceById((Long)session.getAttribute("user")).getIdPersonne());
 	}
 }

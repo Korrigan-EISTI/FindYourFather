@@ -18,10 +18,36 @@ export class InvitationElementComponent {
 	}|undefined=undefined;
 	
 	acceptInvitation(){
-		//TODO
+		const formData = new FormData();
+		formData.append("id",this.invitation!.id.toString())
+		const url = '/relation/accept'; 
+		
+		fetch(url, {
+			method: 'post',
+			body: new URLSearchParams(formData as any)
+		}).then(response => {
+			if (!response.ok) {
+				throw new Error(response.statusText);
+			}
+			
+			response.text().then(text => {console.log(text);})
+		});
 	}
 	
 	refuseInvitation(){
-		//TODO
+		const formData = new FormData();
+		formData.append("id",this.invitation!.id.toString())
+		const url = '/relation/refuse'; 
+		
+		fetch(url, {
+			method: 'post',
+			body: new URLSearchParams(formData as any)
+		}).then(response => {
+			if (!response.ok) {
+				throw new Error(response.statusText);
+			}
+			
+			response.text().then(text => {console.log(text);})
+		});
 	}
 }
