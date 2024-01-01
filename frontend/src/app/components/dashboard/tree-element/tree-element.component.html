@@ -1,7 +1,7 @@
 <div>
 	<div class="personneData">
 		<div>
-			<p>{{personne!.prenom}} {{personne!.nom}}</p>
+			<p>[{{personne!.id}}]	{{personne!.prenom}} {{personne!.nom}}</p>
 		</div>
 		<div>
 			<button class="personneDataButton" (click)="addingConnexionForm_ShowButton()">+</button>
@@ -67,7 +67,7 @@
 		        	<option value="TODO">Là il faudrait lister dynamiquement les liens directs de la personne</option>
 		        </select>
 				<br>
-		        <button type="submit">Remove relation</button>
+		        <button type="submit" (click)="removeRelation()">Remove relation</button>
 		    </form>
 		</div>
 	</div>

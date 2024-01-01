@@ -29,7 +29,6 @@ public class ShowUtilisateurController {
 		
 		if (session.getAttribute("user") == null)
 			return null;
-		System.out.println("Oui");
 		Utilisateur user = utilisateurRepository.findById((Long) session.getAttribute("user")).get();
 		return user;
 	}

@@ -35,12 +35,12 @@
 	
 		<div class="profile-section">
 			<label>Gender:</label>
-			<span *ngIf="personne.numeroSecu">{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+			<span>{{ userProfile.genre }}</span> <!-- <span *ngIf="personne.numeroSecu">{{ userProfile.genre == 'HOMME' ? 'Male' : 'Female' }}</span> -->
 		</div>
 	
 		<div class="profile-section">
 			<label>Phone Number:</label>
-			<span>{{ userProfile.phoneNumber }}</span>
+			<span *ngIf="personne.numeroSecu">{{ userProfile.phoneNumber == '0null' ? 'N/A' : userProfile.phoneNumber }}</span>
 		</div>
 	
 		<div *ngIf="personne.numeroSecu" class="profile-button-div">
@@ -82,7 +82,7 @@
 	
 		<div class="profile-section">
 			<label>Gender:</label>
-			<span *ngIf="personne.numeroSecu">{{ userProfile.genre === 1 ? 'Male' : 'Female' }}</span>
+			<span>{{ userProfile.genre }}</span> <!-- <span *ngIf="personne.numeroSecu">{{ userProfile.genre == 'HOMME' ? 'Male' : 'Female' }}</span> -->
 		</div>
 	
 		<div class="profile-section">

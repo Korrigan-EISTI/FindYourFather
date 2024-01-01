@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 	styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
+	
 	formData: any = {};
 	logged: boolean = false;
 	saveFormData : FormData = new FormData();

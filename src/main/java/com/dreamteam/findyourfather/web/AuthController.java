@@ -133,7 +133,6 @@ public class AuthController {
     		@RequestParam String nationality,
     		@RequestParam String gender, 
     		HttpSession session) {
-    		System.out.println("Oui");
     	if(utilisateurRepository.findByEmail(email).size()==0){
     		Personne pers = searchPersonne(lastname, firstname, birthdate);
     		Utilisateur utilisateur = new Utilisateur(pers.getId(), phoneNumber, email, password, Utilisateur.Visiblity.PUBLIC);

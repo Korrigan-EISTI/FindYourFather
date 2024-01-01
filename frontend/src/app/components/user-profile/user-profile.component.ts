@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 export class UserProfile {
 	email: string;
 	nationalite: string;
-	genre: number;
+	genre: string;
 	phoneNumber: string;
 
 	constructor() {
 		this.email = '';
 		this.nationalite = '';
-		this.genre = 0;
+		this.genre = '';
 		this.phoneNumber = '';
 	}
 }
@@ -37,6 +37,7 @@ export class PersonneProfile {
 	templateUrl: './user-profile.component.html',
 	styleUrls: ['./user-profile.component.css']
 })
+
 export class UserProfileComponent implements OnInit {
 
 	userProfile: UserProfile = new UserProfile();
@@ -74,6 +75,7 @@ export class UserProfileComponent implements OnInit {
 			
     	});
     	this.router.navigate(['/index']);
+    	this.toggleEditFields();
 	}
 	
 	public showUser(){
