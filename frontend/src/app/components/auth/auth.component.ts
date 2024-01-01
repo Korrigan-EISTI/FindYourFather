@@ -7,9 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AuthComponent {
 	
-	formData: any = {};
+	formData: any = {isForeigner: false,ssn: '',};
 	logged: boolean = false;
 	saveFormData : FormData = new FormData();
+	
+	onIsForeignerChange() {
+        // Si la case à cocher isForeigner est cochée, définir la valeur du SSN à 99
+        if (this.formData.isForeigner) {
+            this.formData.ssn = '99';
+        } else {
+            this.formData.ssn = ''; // Réinitialiser la valeur du SSN si la case est décochée
+        }
+    }
 	
 	onRegisterSubmit() {
 		const form: HTMLFormElement = document.getElementById('registerForm') as HTMLFormElement;
