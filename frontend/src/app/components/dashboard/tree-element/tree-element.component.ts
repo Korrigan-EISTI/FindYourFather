@@ -58,17 +58,6 @@ export class TreeElementComponent {
 			this.showingRemovingConnexionForm = true;
 		}
 	}
-
-	async findDirectLinks() {
-	    if (this.personne?.pere !== undefined) {
-	        const pereDetails = await this.getPersonneDetails(this.personne.pere);
-	        this.directLinks.push(pereDetails);
-	    }
-	    if (this.personne?.mere !== undefined) {
-	        const mereDetails = await this.getPersonneDetails(this.personne.mere);
-	        this.directLinks.push(mereDetails);
-	    }
-	}
 	
 	async getPersonneDetails(id: number): Promise<any> {
 	    const url = `/getPersonneById/${id}`;
@@ -103,7 +92,7 @@ export class TreeElementComponent {
 	}
 	
 	removeRelation() {
-	    const form: HTMLFormElement = document.getElementById('add-relation-form') as HTMLFormElement;
+	    const form: HTMLFormElement = document.getElementById('remove-relation-form') as HTMLFormElement;
 	    const formData = new FormData(form);
 	    formData.append("id", this.personne!.id.toString());
 	    const url = '/relation/remove';

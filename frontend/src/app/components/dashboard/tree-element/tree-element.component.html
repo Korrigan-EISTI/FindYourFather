@@ -64,10 +64,8 @@
 		        <br>
 		        <label for="relationToRemoveSelect">Relation :</label>
 		        <select id="relationToRemoveSelect" name="relationToRemove" required>
-		            <option value=""></option>
-		            <option *ngFor="let link of directLinks" [value]="link.id">
-		                [{{link.id}}] {{link.prenom}} {{link.nom}}
-		            </option>
+		            <option value="mother">mother</option>
+		            <option value="mother">father</option>
 		        </select>
 		        <br>
 		        <button type="submit" (click)="removeRelation()">Remove relation</button>

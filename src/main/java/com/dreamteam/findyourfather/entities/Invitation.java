@@ -11,12 +11,6 @@ public class Invitation implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	public enum Status{
-		PENDING,
-		ACCEPTED,
-		REFUSED
-	}
-	
 	public enum Relation{
 		FATHER,
 		MOTHER,
@@ -29,16 +23,14 @@ public class Invitation implements Serializable{
 	private Long root;
 	private Long target;
 	private String relation;
-	private Status status;
 	public Invitation() {
 		super();
 	}
-	public Invitation(Long idUser, Long root, Long target,String relation, Status status) {
+	public Invitation(Long idUser, Long root, Long target,String relation) {
 		super();
 		this.idUser= idUser;
 		this.root= root;
 		this.target= target;
-		this.status = status;
 		this.relation = relation;
 	}
 
@@ -80,12 +72,5 @@ public class Invitation implements Serializable{
 
 	public void setTarget(Long target) {
 		this.target = target;
-	}
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 }

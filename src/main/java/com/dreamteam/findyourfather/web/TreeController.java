@@ -1,5 +1,6 @@
 package com.dreamteam.findyourfather.web;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,9 +31,29 @@ public class TreeController {
 		Utilisateur user = utilisateurRepository.findById((Long) session.getAttribute("user")).get();
     	Personne personne = personneRepository.findById(user.getIdPersonne()).get();
     	Set<Personne> pers = new HashSet<Personne>();
-    	
-    	getParent(personne, pers);
-    	getChildren(personne, pers);
+    	HashSet<Personne> toSearch= new HashSet<Personne>();
+    	toSearch.add(personne);
+    	while(!toSearch.isEmpty()) {
+    		HashSet<Personne> tmp = new HashSet<Personne>();
+    		for(Personne p : toSearch) {
+    			if(p.mere!=null)
+    			{
+    				tmp.add(personneRepository.findById(p.mere).get());
+    			}
+    			if(p.pere!=null)
+    			{
+    				tmp.add(personneRepository.findById(p.pere).get());
+    			}
+    			tmp.addAll(personneRepository.findByMother(p.getId()));
+    			tmp.addAll(personneRepository.findByFather(p.getId()));
+    		}
+    		tmp.removeAll(pers);
+    		for(Personne p : tmp) {
+    			System.out.println(""+p.getId());
+    		}
+    		pers.addAll(tmp);
+    		toSearch=tmp;
+    	}
 		return pers;
 	}
     

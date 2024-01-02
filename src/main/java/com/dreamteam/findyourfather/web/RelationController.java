@@ -86,7 +86,7 @@ public class RelationController {
 			return "Relation successfully created";
 		}
 		else {
-			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd,Invitation.Status.PENDING));
+			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd));
 			return "Invitation sent";
 		}
     }
@@ -130,5 +130,19 @@ public class RelationController {
     	}
 		return "ok";
     	
+    }
+
+    @PostMapping(path = "/remove",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String refuseRelation(@RequestParam Long id,@RequestParam String relation,HttpSession session) {
+    	Personne p = personneRepository.getReferenceById(id);
+    	switch(relation) {
+    	case "father":
+    		p.setPere(null);
+    		return "removed father";
+    	case "mother":
+    		p.setMere(null);
+    		return "removed mother";
+    	}
+    	return "wrong relation specified";
     }
 }
