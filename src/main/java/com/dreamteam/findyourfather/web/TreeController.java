@@ -56,46 +56,4 @@ public class TreeController {
     	}
 		return pers;
 	}
-    
-    private void getParent(Personne pers, Set<Personne> p) {
-    	p.add(pers);
-    	
-    	if (pers.mere != null)
-    	{
-    		getParent(personneRepository.findById(pers.mere).get(), p);
-    		p.addAll(personneRepository.findByMother(pers.mere));
-    	}
-    		
-    	if( pers.pere != null)
-    	{
-    		getParent(personneRepository.findById(pers.pere).get(), p);
-    		p.addAll(personneRepository.findByFather(pers.pere));
-    	}	
-    }
-    
-    private void getChildren(Personne pers, Set<Personne> p){
-    	Set<Personne> children;
-    	switch(pers.getGenre())
-    	{
-    		case HOMME : 
-    			children = personneRepository.findByFather(pers.getId());
-    			p.addAll(children);
-    			for (Personne child : children){
-    				getChildren(child, p);
-    				getParent(child, p);
-    			}
-    			break;
-    		case FEMME :
-    			children = personneRepository.findByMother(pers.getId());
-    			p.addAll(children);
-    			for (Personne child : children){
-    				getChildren(child, p);
-    				getParent(child, p);
-    			}
-    			break;
-    		default:
-    			break;
-    	}
-
-    }
 }
