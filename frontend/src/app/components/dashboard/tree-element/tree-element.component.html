@@ -60,13 +60,16 @@
 		</div>
 		
 		<div *ngIf="showingRemovingConnexionForm" class="editingLinkDiv">
-			<form id="remove-relation-form" class="family-tree-form">
-		    	<br>
+		    <form id="remove-relation-form" class="family-tree-form">
+		        <br>
 		        <label for="relationToRemoveSelect">Relation :</label>
 		        <select id="relationToRemoveSelect" name="relationToRemove" required>
-		        	<option value="TODO">Là il faudrait lister dynamiquement les liens directs de la personne</option>
+		            <option value=""></option>
+		            <option *ngFor="let link of directLinks" [value]="link.id">
+		                [{{link.id}}] {{link.prenom}} {{link.nom}}
+		            </option>
 		        </select>
-				<br>
+		        <br>
 		        <button type="submit" (click)="removeRelation()">Remove relation</button>
 		    </form>
 		</div>

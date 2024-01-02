@@ -36,8 +36,7 @@ public class TreeController {
 		return pers;
 	}
     
-    private void getParent(Personne pers, Set<Personne> p)
-    {
+    private void getParent(Personne pers, Set<Personne> p) {
     	p.add(pers);
     	
     	if (pers.mere != null)
@@ -46,13 +45,11 @@ public class TreeController {
     		p.addAll(personneRepository.findByMother(pers.mere));
     	}
     		
-    		
     	if( pers.pere != null)
     	{
     		getParent(personneRepository.findById(pers.pere).get(), p);
     		p.addAll(personneRepository.findByFather(pers.pere));
-    	}
-    		
+    	}	
     }
     
     private void getChildren(Personne pers, Set<Personne> p){
