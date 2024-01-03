@@ -1,6 +1,8 @@
 package com.dreamteam.findyourfather;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,20 @@ public class QueryInvitationTest {
 		}
 	}
 	
+	@Test
+	public void testSaveInvitation() {
+		Invitation inv = new Invitation((long) 2, null, (long) 3, null);
+		assertDoesNotThrow(() -> invRep.save(inv));
+		for (Invitation i : invRep.findByIdUser((long) 2)) {
+			assertEquals(inv.getId(), i.getId());
+		}
+	}
+	
+	@Test
+	public void testRemoveInvitation() {
+		for (Invitation i : invRep.findByIdUser((long) 2)) {
+			assertDoesNotThrow(() -> invRep.delete(i));
+		}
+		assertEquals(true, invRep.findByIdUser((long) 2).isEmpty());
+	}
 }
