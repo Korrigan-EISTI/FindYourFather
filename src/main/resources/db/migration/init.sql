@@ -4,11 +4,13 @@ DELETE FROM personne;
 -- Suppression du contenu de la table utilisateur
 DELETE FROM public.utilisateur;
 
+DELETE FROM public.invitation;
+
 -- Insertion de données d'exemple pour une famille
 INSERT INTO personne (id, numero_secu, nom, prenom, date_deces, nationalite, genre, naissance, pere, mere)
 VALUES
   -- Enfant
-  (1, 123456789, 'Doe', 'John', NULL, 'French', 0, '01/01/1990', NULL, NULL),
+  (1, 123456789, 'Doe', 'John', NULL, 'French', 0, '01/01/1990', 2, 3),
   
   -- Parents
   (2, 111111111, 'Doe', 'Peter', NULL, 'French', 0, '1965-01-01', NULL, NULL), -- Père
@@ -22,6 +24,11 @@ VALUES
 UPDATE personne SET pere = 2, mere = 3 WHERE id = 1; -- Enfant lié aux parents
 UPDATE personne SET pere = 4, mere = 5 WHERE id = 2; -- Père de l'enfant liés aux grands-parents de l'enfant
 
--- Insertion de l'utilisateur lié à la personne 'Enfant'
+-- Insertion de deux utilisateurs
 INSERT INTO public.utilisateur (id, email, id_personne, mdp, visibility_level)
-VALUES (1, 'test@test.com', 1, 'test', 0);
+VALUES (1, 'test@test.com', 1, 'test', 0),
+	   (2, 'test@gmail.com', 2, 'test', 0);
+
+-- Insertion d'une invitation entre les deux utilisateurs
+INSERT INTO public.invitation (id, id_user, relation, root, target)
+VALUES (1, 1, NULL, NULL, 2);

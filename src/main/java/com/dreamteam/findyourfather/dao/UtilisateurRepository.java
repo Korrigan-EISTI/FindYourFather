@@ -11,7 +11,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>{
 	
 	List<Utilisateur> findByEmail(String email);
 	
-	@Query(value="SELECT * FROM utilisateur WHERE utilisateur.idPersonne = ?1", nativeQuery = true)
+	@Query(value="SELECT * FROM utilisateur WHERE utilisateur.id_personne = ?1", nativeQuery = true)
 	Utilisateur findUserByPersonneId(Long id);
 
 	List<Utilisateur> findByIdPersonne(Long IdPersonne);

@@ -5,13 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class FindYourFatherApplicationTests {
-
+	
 	@Test
 	void contextLoads() {
-	}
-
-	@Test
-	void testQueryFathers(){
-		
 	}
 }
