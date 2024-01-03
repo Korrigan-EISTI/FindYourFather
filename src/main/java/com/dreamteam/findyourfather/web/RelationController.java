@@ -60,8 +60,10 @@ public class RelationController {
 				p.setGenre(Personne.Genre.HOMME);
 			}
 			target = p.getId();
+			personneRepository.save(p);
 		}
     	
+    	targets = personneRepository.findByNumeroSecu(ssn);
 		List<Utilisateur> utilisateurs = utilisateurRepository.findByIdPersonne(target);
 		if(utilisateurs.size()==0) {
 	    	if(relationToAdd.equals("father")) {
@@ -76,12 +78,12 @@ public class RelationController {
 	    		Personne child = targets.get(0);
 	    		if(personne.getGenre().equals(Personne.Genre.HOMME)) {
 	    			child.setPere(id);
+	    			personneRepository.save(child);
 	    		}
-	    		if(personne.getGenre().equals(Personne.Genre.FEMME)) {
+	    		else if(personne.getGenre().equals(Personne.Genre.FEMME)) {
 	    			child.setMere(id);
+	    			personneRepository.save(child);
 	    		}
-				personneRepository.save(child);
-	    		
 	    	}
 			return "Relation successfully created";
 		}

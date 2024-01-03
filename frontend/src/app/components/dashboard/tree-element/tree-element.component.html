@@ -16,9 +16,9 @@
 		        <label for="relationToAddSelect">Relation :</label>
 		        <select id="relationToAddSelect" name="relationToAdd" required>
 		        	<option value=""></option>
-		            <option value="child">Child</option>
 		            <option value="father" *ngIf="personne!.pere == null">Father</option>
 		            <option value="mother" *ngIf="personne!.mere == null">Mother</option>
+		        	<option value="child">Child</option>
 		        </select>
 				<br>
 		        <div class="form-group">
