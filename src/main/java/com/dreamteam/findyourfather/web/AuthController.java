@@ -75,7 +75,14 @@ public class AuthController {
      */
     @SuppressWarnings("unused")
     private class LoginInfo {
-
+        private String email;
+		private String password;
+		private Long ssn;
+		private String lastname;
+		private String firstname;
+		private String birthdate;
+		private String nationality;
+		private String gender;
         /**
          * L'adresse e-mail de l'utilisateur.
          *
