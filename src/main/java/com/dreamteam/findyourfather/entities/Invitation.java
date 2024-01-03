@@ -23,9 +23,11 @@ public class Invitation implements Serializable{
 	private Long root;
 	private Long target;
 	private String relation;
+	
 	public Invitation() {
 		super();
 	}
+	
 	public Invitation(Long idUser, Long root, Long target,String relation) {
 		super();
 		this.idUser= idUser;

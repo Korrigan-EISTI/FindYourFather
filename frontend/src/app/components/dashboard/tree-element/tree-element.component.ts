@@ -25,21 +25,6 @@ export class TreeElementComponent {
 	    pere?: number;
 	    mere?: number;
 	} | undefined = undefined;
-	
-	directLinks: {
-	    id: number;
-	    key: number;
-	    numeroSecu: number;
-	    nom: string;
-	    prenom: string;
-	    naissance: string;
-	    dateNaissance: string;
-	    dateDeces: string;
-	    nationalite: string;
-	    genre: number;
-	    pere?: number;
-	    mere?: number;
-	}[] = [];
 
 	addingConnexionForm_ShowButton() {
 		if (this.showingAddingConnexionForm == true && this.showingRemovingConnexionForm == false) {
@@ -57,20 +42,6 @@ export class TreeElementComponent {
 			this.showingAddingConnexionForm = false;
 			this.showingRemovingConnexionForm = true;
 		}
-	}
-	
-	async getPersonneDetails(id: number): Promise<any> {
-	    const url = `/getPersonneById/${id}`;
-	    try {
-	        const response = await fetch(url, { method: 'get' });
-	        if (!response.ok) {
-	            throw new Error(`Erreur lors de la récupération des détails de la personne (statut : ${response.status}).`);
-	        }
-	        return response.json();
-	    } catch (error) {
-	        console.error('Erreur lors de la récupération des détails de la personne :', error);
-	        return [];
-	    }
 	}
 	
 	addRelation() {

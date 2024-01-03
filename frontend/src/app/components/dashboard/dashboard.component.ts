@@ -32,7 +32,6 @@ export class DashboardComponent {
 
 		promise.then((data: any[]) => {
 			data.forEach((personne: any) => {
-				// Création de tree-element
 				const refTreeElement = this.treeVcr.createComponent(TreeElementComponent);
 				refTreeElement.instance.personne = personne;
 			});
@@ -56,7 +55,6 @@ export class DashboardComponent {
 			console.log(invitations);
 			invitations.forEach((invitation: any) => {
 				console.log(invitation);
-				// Création de invitation-element
 				const refInvitation = this.invitationVcr.createComponent(InvitationElementComponent);
 				refInvitation.instance.invitation = invitation;
 			});
@@ -89,7 +87,7 @@ export class DashboardComponent {
 	}
 
 	private async getInvitationsFromBackend(): Promise<any[]> {
-		const url = '/getInvitations';  // TODO : Mettre le bon endpoint
+		const url = '/getInvitations';
 		try {
 			const response = await fetch(url, { method: 'post' });
 			return response.json();
@@ -113,8 +111,8 @@ export class DashboardComponent {
 				"dateDeces": null,
 				"nationalite": "French",
 				"genre": i % 2 === 0 ? "FEMME" : "HOMME",
-				"pere": null,
-				"mere": null,
+				"pere": i-1,
+				"mere": i+1,
 				"key": i
 			});
 		}

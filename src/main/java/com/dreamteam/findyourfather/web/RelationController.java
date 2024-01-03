@@ -90,16 +90,36 @@ public class RelationController {
 			return "Invitation sent";
 		}
     }
+    
+    @PostMapping(path = "/remove",produces = MediaType.TEXT_PLAIN_VALUE)
+    public String refuseRelation(@RequestParam Long id, @RequestParam String relation, HttpSession session) {
+    	
+    	Personne p = personneRepository.getReferenceById(id);
+    	switch(relation) {
+	    	case "father":
+	    		p.setPere(null);
+	    		personneRepository.save(p);
+	    		return "Removed father";
+	    		
+	    	case "mother":
+	    		p.setMere(null);
+	    		personneRepository.save(p);
+	    		return "Removed mother";
+	    }
+    	return "Wrong relation specified";
+    }
 
     @PostMapping(path = "/accept",produces = MediaType.TEXT_PLAIN_VALUE)
-    public String acceptRelation(@RequestParam Long id,HttpSession session) {
+    public String acceptRelation(@RequestParam Long id, HttpSession session) {
+    	
     	Invitation invitation = invitationRepository.getReferenceById(id);
     	Long user = utilisateurRepository.findByIdPersonne(invitation.getTarget()).get(0).getId();
-    	if(!((Long)session.getAttribute("user")).equals(user)) {
-        	return "wrong user";
-    	}
-		String relation = invitation.getRelation();
+    	
+    	if(!((Long)session.getAttribute("user")).equals(user)) return "Wrong user";
+		
+    	String relation = invitation.getRelation();
 		Personne root = personneRepository.getReferenceById(invitation.getRoot());
+		
 		if(relation.equals("father")) {
 			root.setPere(invitation.getTarget());
 			personneRepository.save(root);
@@ -124,25 +144,12 @@ public class RelationController {
 
     @PostMapping(path = "/refuse",produces = MediaType.TEXT_PLAIN_VALUE)
     public String refuseRelation(@RequestParam Long id,HttpSession session) {
+    	
     	Invitation invitation = invitationRepository.getReferenceById(id);
     	if((Long)session.getAttribute("user") == invitation.getIdUser()) {
     		invitationRepository.deleteById(id);
     	}
 		return "ok";
     	
-    }
-
-    @PostMapping(path = "/remove",produces = MediaType.TEXT_PLAIN_VALUE)
-    public String refuseRelation(@RequestParam Long id,@RequestParam String relation,HttpSession session) {
-    	Personne p = personneRepository.getReferenceById(id);
-    	switch(relation) {
-    	case "father":
-    		p.setPere(null);
-    		return "removed father";
-    	case "mother":
-    		p.setMere(null);
-    		return "removed mother";
-    	}
-    	return "wrong relation specified";
     }
 }

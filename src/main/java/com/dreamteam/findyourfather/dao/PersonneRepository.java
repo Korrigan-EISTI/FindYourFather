@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.dreamteam.findyourfather.entities.Personne;
 
 public interface PersonneRepository extends JpaRepository<Personne, Long>{
+	
 	@Query(value="SELECT * FROM personne WHERE personne.pere = ?1", nativeQuery = true)
 	Set<Personne> findByFather(Long id);
 	

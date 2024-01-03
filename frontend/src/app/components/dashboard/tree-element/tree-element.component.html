@@ -1,7 +1,7 @@
 <div>
 	<div class="personneData">
 		<div>
-			<p>[{{personne!.id}}]	{{personne!.prenom}} {{personne!.nom}}</p>
+			<p>[{{personne!.id}}] {{personne!.prenom}} {{personne!.nom}}</p>
 		</div>
 		<div>
 			<button class="personneDataButton" (click)="addingConnexionForm_ShowButton()">+</button>
@@ -17,8 +17,8 @@
 		        <select id="relationToAddSelect" name="relationToAdd" required>
 		        	<option value=""></option>
 		            <option value="child">Child</option>
-		            <option value="father">Father</option>
-		            <option value="mother">Mother</option>
+		            <option value="father" *ngIf="personne!.pere == null">Father</option>
+		            <option value="mother" *ngIf="personne!.mere == null">Mother</option>
 		        </select>
 				<br>
 		        <div class="form-group">
@@ -63,9 +63,10 @@
 		    <form id="remove-relation-form" class="family-tree-form">
 		        <br>
 		        <label for="relationToRemoveSelect">Relation :</label>
-		        <select id="relationToRemoveSelect" name="relationToRemove" required>
-		            <option value="mother">mother</option>
-		            <option value="mother">father</option>
+		        <select id="relationToRemoveSelect" name="relation" required>
+		        	<option value=""></option>
+		            <option value="father" *ngIf="personne!.pere !== null">[{{personne!.pere}}] Father</option>
+		            <option value="mother" *ngIf="personne!.mere !== null">[{{personne!.mere}}] Mother</option>
 		        </select>
 		        <br>
 		        <button type="submit" (click)="removeRelation()">Remove relation</button>
