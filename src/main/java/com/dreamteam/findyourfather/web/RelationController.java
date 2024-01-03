@@ -13,6 +13,41 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
+/**
+ * Le contrôleur {@code RelationController} gère les requêtes liées aux relations entre les personnes
+ * dans l'application "Find Your Father".
+ *
+ * <p>Ce contrôleur utilise l'annotation {@code @RestController} pour indiquer qu'il est un composant
+ * de contrôleur Spring qui traite les requêtes REST. Il expose des méthodes pour ajouter, accepter, refuser
+ * et supprimer des relations entre les personnes.</p>
+ *
+ * <pre>{@code
+ * @RestController
+ * @RequestMapping("/relation")
+ * public class RelationController {
+ *     // ...
+ * }
+ * }</pre>
+ * 
+ * <p>Assurez-vous que les annotations et les dépendances nécessaires sont correctement
+ * configurées pour une utilisation avec Spring Framework.</p>
+ * 
+ * @author MARTIN MACE DE GASTINES
+ * @author LOUIS-ALEXANDRE LAGUET
+ * @author ALEXIS TOURRENC--LECERF
+ * @version 1.0
+ * @since 2024-01-03
+ * @see RestController
+ * @see RequestMapping
+ * @see PostMapping
+ * @see RequestParam
+ * @see HttpSession
+ * @see InvitationRepository
+ * @see UtilisateurRepository
+ * @see PersonneRepository
+ * @see Invitation
+ * @see Personne
+ */
 @RestController
 @RequestMapping("/relation")
 public class RelationController {
@@ -21,12 +56,33 @@ public class RelationController {
     private final UtilisateurRepository utilisateurRepository;
     private final PersonneRepository personneRepository;
 
+	/**
+     * Constructeur du contrôleur de relations.
+     *
+     * @param invitationRepository  Le référentiel des invitations.
+     * @param utilisateurRepository Le référentiel des utilisateurs.
+     * @param personneRepository    Le référentiel des personnes.
+     */
     public RelationController(InvitationRepository invitationRepository, UtilisateurRepository utilisateurRepository, PersonneRepository personneRepository) {
         this.invitationRepository = invitationRepository;
 		this.utilisateurRepository = utilisateurRepository;
 		this.personneRepository = personneRepository;
     }
 
+	/**
+     * Ajoute une relation entre deux personnes.
+     *
+     * @param relationToAdd Le type de relation à ajouter (père, mère, enfant).
+     * @param lastName      Le nom de la personne à ajouter.
+     * @param firstName     Le prénom de la personne à ajouter.
+     * @param birthdate     La date de naissance de la personne à ajouter.
+     * @param ssn           Le numéro de sécurité sociale de la personne à ajouter.
+     * @param nationality   La nationalité de la personne à ajouter.
+     * @param gender        Le genre de la personne à ajouter.
+     * @param id            L'ID de la personne existante à laquelle ajouter la relation.
+     * @param session       La session HTTP.
+     * @return              Le message indiquant le succès ou l'échec de l'opération.
+     */
     @PostMapping(path = "/add",produces = MediaType.TEXT_PLAIN_VALUE)
     public @ResponseBody String addRelation(@RequestParam String relationToAdd,
     		@RequestParam String lastName,
@@ -93,6 +149,13 @@ public class RelationController {
 		}
     }
     
+	/**
+     * Accepte une invitation de relation entre deux personnes.
+     *
+     * @param id      L'ID de l'invitation à accepter.
+     * @param session La session HTTP.
+     * @return        Le message indiquant le succès ou l'échec de l'opération.
+     */
     @PostMapping(path = "/remove",produces = MediaType.TEXT_PLAIN_VALUE)
     public String refuseRelation(@RequestParam Long id, @RequestParam String relation, HttpSession session) {
     	
@@ -111,6 +174,13 @@ public class RelationController {
     	return "Wrong relation specified";
     }
 
+	/**
+     * Accepte une invitation de relation entre deux personnes.
+     *
+     * @param id      L'ID de l'invitation à accepter.
+     * @param session La session HTTP.
+     * @return        Le message indiquant le succès ou l'échec de l'opération.
+     */
     @PostMapping(path = "/accept",produces = MediaType.TEXT_PLAIN_VALUE)
     public String acceptRelation(@RequestParam Long id, HttpSession session) {
     	
@@ -144,6 +214,13 @@ public class RelationController {
     	return "ok";
     }
 
+	/**
+     * Refuse une invitation de relation entre deux personnes.
+     *
+     * @param id      L'ID de l'invitation à refuser.
+     * @param session La session HTTP.
+     * @return        Le message indiquant le succès ou l'échec de l'opération.
+     */
     @PostMapping(path = "/refuse",produces = MediaType.TEXT_PLAIN_VALUE)
     public String refuseRelation(@RequestParam Long id,HttpSession session) {
     	
