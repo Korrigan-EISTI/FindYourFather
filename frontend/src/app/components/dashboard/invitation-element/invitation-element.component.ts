@@ -9,18 +9,11 @@ import { Component, Input } from '@angular/core';
 export class InvitationElementComponent {
 
 	@Input()
-	invitation: {
-		id: number;
-		idUser: number;
-		root: number;
-		target: number;
-		relation: string;
-		status: string;
-	} | undefined = undefined;
+	invitation: any | undefined = undefined;
 
     acceptInvitation() {
         const formData = new FormData();
-        formData.append("id", this.invitation!.id.toString());
+        formData.append("id", this.invitation!.invitation.id.toString());
         const url = '/relation/accept';
 
         fetch(url, {
@@ -39,7 +32,7 @@ export class InvitationElementComponent {
 
     refuseInvitation() {
         const formData = new FormData();
-        formData.append("id", this.invitation!.id.toString());
+        formData.append("id", this.invitation!.invitation.id.toString());
         const url = '/relation/refuse';
 
         fetch(url, {

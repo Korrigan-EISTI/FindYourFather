@@ -57,6 +57,7 @@ export class DashboardComponent {
 				console.log(invitation);
 				const refInvitation = this.invitationVcr.createComponent(InvitationElementComponent);
 				refInvitation.instance.invitation = invitation;
+				console.log(invitation);
 			});
 		})
 			.catch(error => {

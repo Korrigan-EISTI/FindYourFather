@@ -2,7 +2,7 @@
     <div class="invitationData">
         <div id="invitationText">
             <p>
-                {{ invitation!.idUser }} wants you to be {{ invitation!.root }}'s {{invitation!.relation.toLowerCase()}}
+                {{ invitation!.user.prenom }} {{ invitation!.user.nom }} wants you to be {{ invitation!.root.prenom }} {{ invitation!.root.nom }}'s {{invitation!.invitation.relation.toLowerCase()}}
             </p>
         </div>
         <div id="invitationButtons">

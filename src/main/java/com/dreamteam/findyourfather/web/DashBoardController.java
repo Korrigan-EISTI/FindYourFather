@@ -1,6 +1,8 @@
 package com.dreamteam.findyourfather.web;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.MediaType;
@@ -14,6 +16,8 @@ import com.dreamteam.findyourfather.dao.PersonneRepository;
 import com.dreamteam.findyourfather.dao.UtilisateurRepository;
 import com.dreamteam.findyourfather.entities.Invitation;
 import com.dreamteam.findyourfather.entities.Personne;
+import com.dreamteam.findyourfather.web.DashBoardController.InvitationInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -70,6 +74,13 @@ public class DashBoardController {
 		this.utilisateurRepository = utilisateurRepository;
 		this.personneRepository = personneRepository;
     }
+    class InvitationInfo{
+        @JsonProperty("invitation")
+    	public Invitation invitation;
+    	public Personne user;
+    	public Personne root;
+    	public Personne target;
+    }
     
     /**
      * Obtient les informations d'une personne en fonction de son ID.
@@ -89,7 +100,17 @@ public class DashBoardController {
      * @return        La liste des invitations associées à l'utilisateur connecté.
      */
 	@PostMapping(path = "/getInvitations", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Invitation> getInvitations(HttpSession session){
-		return invitationRepository.findByTarget(utilisateurRepository.getReferenceById((Long)session.getAttribute("user")).getIdPersonne());
+	public List<InvitationInfo> getInvitations(HttpSession session){
+		List<Invitation> invitations = invitationRepository.findByTarget(utilisateurRepository.getReferenceById((Long)session.getAttribute("user")).getIdPersonne());
+		List<InvitationInfo> result = new ArrayList<>();
+		for(Invitation i : invitations) {
+			InvitationInfo ii = new InvitationInfo();
+			ii.invitation = i;
+			ii.user = personneRepository.findById(utilisateurRepository.findById(i.getIdUser()).get().getIdPersonne()).get();
+			ii.root = personneRepository.findById(i.getRoot()).get();
+			ii.target = personneRepository.findById(i.getTarget()).get();
+			result.add(ii);
+		}
+		return result;
 	}
 }
