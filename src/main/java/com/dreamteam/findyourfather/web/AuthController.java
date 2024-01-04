@@ -239,6 +239,26 @@ public class AuthController {
     	}
     	return "<p style='color: red;'>The email/password combination is incorrect.</p>";
     }
+    
+    /**
+     * Gère la requête de déconnexion d'un utilisateur.
+     *
+     * @param session   La session HTTP.
+     * @return          Un message indiquant le résultat de la déconnexion.
+     */
+    @PostMapping("/logout")
+    public @ResponseBody String logout(HttpSession session) {
+        // Check if the user is logged in
+        Object userId = session.getAttribute("user");
+        if (userId != null) {
+            // User is logged in, invalidate the session
+            session.invalidate();
+            return "<p style='color: green;'>You have been successfully logged out.</p>";
+        } else {
+            // User is not logged in
+            return "<p style='color: red;'>You are not logged in.</p>";
+        }
+    }
 
 	/**
      * Gère la requête d'enregistrement d'un utilisateur correspondante à une personne déjà existante.

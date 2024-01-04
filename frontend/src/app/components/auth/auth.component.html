@@ -12,7 +12,7 @@
 			</div>
 			<div id="loginButtons">
 				<button type="submit" (click)="onLoginSubmit()">Login</button>
-				<button *ngIf="logged" (click)="logout()">Logout</button>
+				<button (click)="logout()">Logout</button>
 			</div>
 			<br><br><p id="loginStatus"></p>
 		</form>

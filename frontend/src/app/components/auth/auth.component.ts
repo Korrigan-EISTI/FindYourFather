@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class AuthComponent {
 	
 	formData: any = {isForeigner: false,ssn: '',};
-	logged: boolean = false;
 	saveFormData : FormData = new FormData();
 	
 	onIsForeignerChange() {
@@ -64,7 +63,6 @@ export class AuthComponent {
 			}
 			response.text().then(text => (document.getElementById("loginStatus")!.innerHTML = text));
 		});
-		this.logged = true;
 		return false;
 	}
 	
@@ -81,11 +79,24 @@ export class AuthComponent {
 			(document.getElementById("AlreadyExist") as HTMLElement).style.visibility = "hidden";
 			response.text().then(text => (document.getElementById("registerStatus")!.innerHTML = text));
 		});
-		this.logged = true;
 		return false;
 	}
 	
 	logout() {
-		this.logged = false;
+	    fetch('/logout', {
+	        method: 'post',
+	    }).then(response => {
+	        if (!response.ok) {
+	            throw new Error(response.statusText);
+	        }
+	        return response.text();
+	    }).then(text => {
+	        document.getElementById("loginStatus")!.innerHTML = text;
+	    }).catch(error => {
+	        console.error('Error during logout:', error);
+	        document.getElementById("loginStatus")!.innerHTML = "An error occurred during logout.";
+	    });
+	    return false;
 	}
+
 }
