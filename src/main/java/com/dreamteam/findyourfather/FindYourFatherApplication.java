@@ -3,6 +3,9 @@ package com.dreamteam.findyourfather;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 /**
  * La classe {@code FindYourFatherApplication} est la classe principale de l'application
@@ -43,6 +46,20 @@ public class FindYourFatherApplication extends SpringBootServletInitializer {
      * @param args Les arguments de la ligne de commande.
      */
     public static void main(String[] args) {
-        SpringApplication.run(FindYourFatherApplication.class, args);
+    	SpringApplication app = new SpringApplication(FindYourFatherApplication.class);
+        app.addListeners(new ApplicationStartup());
+        app.run(args);
+    }
+
+    /**
+     * {@code ApplicationListener} pour afficher un message au démarrage de l'application.
+     */
+    @Component
+    public static class ApplicationStartup implements ApplicationListener<ContextRefreshedEvent> {
+
+        @Override
+        public void onApplicationEvent(ContextRefreshedEvent event) {
+            System.out.println("--- Application is running at http://localhost:8080 ---");
+        }
     }
 }
