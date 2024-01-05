@@ -121,32 +121,34 @@ public class RelationController {
     	
     	targets = personneRepository.findByNumeroSecu(ssn);
 		List<Utilisateur> utilisateurs = utilisateurRepository.findByIdPersonne(target);
-		if(utilisateurs.size()==0) {
-	    	if(relationToAdd.equals("father")) {
-				personne.setPere(target);
-				personneRepository.save(personne);
-	    	}
-	    	else if(relationToAdd.equals("mother")){
-	    		personne.setMere(target);
-				personneRepository.save(personne);
-	    	}
-	    	else if(relationToAdd.equals("child")) {
-	    		Personne child = targets.get(0);
-	    		if(personne.getGenre().equals(Personne.Genre.HOMME)) {
-	    			child.setPere(id);
-	    			personneRepository.save(child);
-	    		}
-	    		else if(personne.getGenre().equals(Personne.Genre.FEMME)) {
-	    			child.setMere(id);
-	    			personneRepository.save(child);
-	    		}
-	    	}
-			return "Relation successfully created";
+		if(utilisateurs.size()==1) {
+			Personne p = personneRepository.getReferenceById(utilisateurs.get(0).getIdPersonne());
+			if(p.getNom().equals(lastName) && p.getPrenom().equals(firstName))
+			{
+				invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd));
+				return "Invitation sent";
+			}
 		}
-		else {
-			invitationRepository.save(new Invitation((Long)session.getAttribute("user"),id,target,relationToAdd));
-			return "Invitation sent";
-		}
+    	if(relationToAdd.equals("father")) {
+			personne.setPere(target);
+			personneRepository.save(personne);
+    	}
+    	else if(relationToAdd.equals("mother")){
+    		personne.setMere(target);
+			personneRepository.save(personne);
+    	}
+    	else if(relationToAdd.equals("child")) {
+    		Personne child = targets.get(0);
+    		if(personne.getGenre().equals(Personne.Genre.HOMME)) {
+    			child.setPere(id);
+    			personneRepository.save(child);
+    		}
+    		else if(personne.getGenre().equals(Personne.Genre.FEMME)) {
+    			child.setMere(id);
+    			personneRepository.save(child);
+    		}
+    	}
+		return "Relation successfully created";
     }
     
 	/**
