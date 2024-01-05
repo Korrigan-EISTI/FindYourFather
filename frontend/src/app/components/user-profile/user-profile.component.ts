@@ -4,13 +4,11 @@ import { Router } from '@angular/router';
 export class UserProfile {
 	email: string;
 	nationalite: string;
-	genre: string;
 	phoneNumber: string;
 
 	constructor() {
 		this.email = '';
 		this.nationalite = '';
-		this.genre = '';
 		this.phoneNumber = '';
 	}
 }
@@ -21,6 +19,7 @@ export class PersonneProfile {
 	prenom: string;
 	naissance: string;
 	nationalite: string;
+	genre: string;
 
 	constructor() {
 		this.numeroSecu = '';
@@ -28,6 +27,7 @@ export class PersonneProfile {
 		this.prenom = '';
 		this.naissance = '';
 		this.nationalite = '';
+		this.genre = '';
 	}
 }
 
